@@ -1,15 +1,19 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import routes from '../constants/routes.json';
-import App from '../containers/App';
-import HomePage from '../containers/HomePage';
+import Title from '../components/Title';
+import SignInPage from '../pages/SignInPage';
+import AppRoutes from './AppRoutes';
 
-export default function Routes() {
+function Routes() {
   return (
-    <App>
+    <div>
+      <Title />
       <Switch>
-        <Route path={routes.HOME} component={HomePage} />
+        <Route exact path="/sign-in" component={SignInPage} />
+        <Route path="/" component={AppRoutes} />
       </Switch>
-    </App>
+    </div>
   );
 }
+
+export default Routes;

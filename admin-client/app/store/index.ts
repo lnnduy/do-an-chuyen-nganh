@@ -5,6 +5,7 @@ import { createLogger } from 'redux-logger';
 import { ThunkAction } from 'redux-thunk';
 import createRootReducer from './rootReducer';
 import { AppState } from './app/reducer';
+import { AuthState } from './auth/reducer';
 
 export const history = createHashHistory();
 
@@ -30,17 +31,12 @@ export const configuredStore = (initialState?: RootState) => {
     middleware,
     preloadedState: initialState,
   });
-
-  if (process.env.NODE_ENV === 'development' && module.hot) {
-    module.hot.accept('./rootReducer', () =>
-      store.replaceReducer(require('./rootReducer').default)
-    );
-  }
   return store;
 };
 
 export type RootState = ReturnType<typeof rootReducer>;
-export type Store = {
+export type ReduxStore = {
   app: AppState;
+  auth: AuthState;
 };
 export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>;

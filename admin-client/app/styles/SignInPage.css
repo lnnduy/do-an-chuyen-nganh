@@ -1,0 +1,16 @@
+.custom-antd-input input {
+  color: #eee !important;
+}
+
+.custom-antd-form-item label {
+  color: #eee !important;
+}
+
+.custom-antd-alert {
+  background-color: #590000;
+  border: none !important;
+}
+
+.custom-antd-alert span.ant-alert-message {
+  color: #ffffff;
+}

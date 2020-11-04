@@ -52,23 +52,22 @@ const createWindow = async () => {
   const getAssetPath = (...paths: string[]): string => {
     return path.join(RESOURCES_PATH, ...paths);
   };
-
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
     height: 728,
-    icon: getAssetPath('icon.png'),
+    icon: getAssetPath('icons', 'logo.png'),
     webPreferences:
       (process.env.NODE_ENV === 'development' ||
         process.env.E2E_BUILD === 'true') &&
       process.env.ERB_SECURE !== 'true'
         ? {
             nodeIntegration: true,
-            devTools: false,
+            devTools: true,
           }
         : {
             preload: path.join(__dirname, 'dist/renderer.prod.js'),
-            devTools: false,
+            devTools: true,
           },
     darkTheme: true,
     titleBarStyle: 'hidden',

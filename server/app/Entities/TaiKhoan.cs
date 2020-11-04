@@ -14,5 +14,6 @@ namespace Server.Entities
     public string Email { get; set; }
     public string SoDienThoai { get; set; }
     public string GioiTinh { get; set; }
+    public string QuyenTruyCap { get; set; }
   }
 }

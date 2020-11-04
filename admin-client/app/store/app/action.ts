@@ -1,6 +1,12 @@
-export function updateTitle(title: string): ActionPayload {
+import { UPDATE_TITLE } from './types';
+
+function updateTitle(title: string): ActionPayload {
   return {
-    type: '',
-    payload: title,
+    type: UPDATE_TITLE,
+    payload: { title },
   };
 }
+
+export default {
+  updateTitle,
+};
