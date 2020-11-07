@@ -1,0 +1,12 @@
+aside.ant-layout-sider-dark {
+  background-color: #181818;
+}
+
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #121212;
+  border-left: 3px solid #007acc;
+}
+
+aside ul.ant-menu.ant-menu-dark {
+  background-color: #181818;
+}

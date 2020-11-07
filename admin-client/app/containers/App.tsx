@@ -1,13 +1,14 @@
 import React, { ReactNode, useState } from 'react';
-import { Layout, Menu } from 'antd';
+import { Image, Layout, Menu, Row } from 'antd';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
+  TeamOutlined,
+  ContainerOutlined,
+  ReadOutlined,
 } from '@ant-design/icons';
 import Title from '../components/Title';
+import { Link } from 'react-router-dom';
 
 const { Header, Sider, Content } = Layout;
 
@@ -27,16 +28,18 @@ export default function App(props: Props) {
     <Layout className="app-container">
       <Title />
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="logo" />
+        <Row justify="center" style={{ padding: '15px 0' }}>
+          <Image width={40} height={40} src="./assets/images/logo.png" />
+        </Row>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-          <Menu.Item key="1" icon={<UserOutlined />}>
-            nav 1
+          <Menu.Item key="1" icon={<TeamOutlined />}>
+            <Link to="/tai-khoan">Tài khoản</Link>
           </Menu.Item>
-          <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-            nav 2
+          <Menu.Item key="2" icon={<ContainerOutlined />}>
+            <Link to="/lop-hoc">Lớp học</Link>
           </Menu.Item>
-          <Menu.Item key="3" icon={<UploadOutlined />}>
-            nav 3
+          <Menu.Item key="3" icon={<ReadOutlined />}>
+            <Link to="/hoc-phan">Học phần</Link>
           </Menu.Item>
         </Menu>
       </Sider>

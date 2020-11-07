@@ -29,7 +29,8 @@ namespace Server.Service
       {
         Subject = new ClaimsIdentity(new[] {
           new Claim("username", taiKhoan.Username),
-          new Claim("id", taiKhoan.Id.ToString())
+          new Claim("id", taiKhoan.Id.ToString()),
+          new Claim(ClaimTypes.Role, taiKhoan.QuyenTruyCap),
         }),
         Expires = DateTime.UtcNow.AddMinutes(double.Parse(_expDate)),
         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

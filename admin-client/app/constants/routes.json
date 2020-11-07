@@ -1,4 +1,6 @@
 {
-  "HOME": "/",
-  "SIGN_IN": "/sign-in"
+  "TAI_KHOAN": "/tai-khoan",
+  "LOP_HOC": "/lop-hoc",
+  "HOC_PHAN": "/hoc-phan",
+  "DANG_NHAP": "/dang-nhap"
 }

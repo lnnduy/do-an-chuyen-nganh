@@ -7,7 +7,6 @@ import { ReduxStore } from '../store';
 const appTitle = new Titlebar({
   backgroundColor: Color.fromHex('#181818'),
   menu: null,
-  icon: './assets/images/icon.png',
 });
 
 export default function Title(): JSX.Element {

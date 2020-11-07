@@ -3,6 +3,13 @@ import { render } from 'react-dom';
 import { AppContainer as ReactHotAppContainer } from 'react-hot-loader';
 import { history, configuredStore } from './store';
 import './app.global.css';
+import { notification } from 'antd';
+
+notification.config({
+  placement: 'topRight',
+  top: 50,
+  duration: 3.5,
+});
 
 const store = configuredStore();
 

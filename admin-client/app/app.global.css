@@ -1,6 +1,9 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
-@import '~antd/dist/antd.css';
+@import '~antd/dist/antd.dark.css';
 @import './styles/SignInPage.css';
+@import './styles/LayoutSidebar.css';
+@import './styles/LayoutHeader.css';
+@import './styles/LayoutMain.css';
 
 body {
   position: relative;

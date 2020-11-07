@@ -72,6 +72,8 @@ const createWindow = async () => {
     darkTheme: true,
     titleBarStyle: 'hidden',
     frame: false,
+    resizable: false,
+    movable: false,
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);

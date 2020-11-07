@@ -1,0 +1,18 @@
+.app-container section.ant-layout.site-layout {
+  background-color: #303030;
+}
+
+main.ant-layout-content.site-layout-background {
+  background-color: #303030;
+  color: white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: #ffffffd9;
+}

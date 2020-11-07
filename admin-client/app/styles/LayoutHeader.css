@@ -1,0 +1,11 @@
+header.ant-layout-header.site-layout-background {
+  background: #242424;
+}
+
+header.ant-layout-header.site-layout-background > span {
+  color: #fff;
+}
+
+header.ant-layout-header.site-layout-background > span:hover {
+  color: #1890ff;
+}

@@ -14,7 +14,6 @@ import { useDispatch } from 'react-redux';
 import actions from '../store/actions';
 import fallImage from '../constants/fall-image';
 import api from '../api';
-import './SignInPage.css';
 import { useHistory } from 'react-router-dom';
 
 function SignInPage() {
@@ -43,7 +42,6 @@ function SignInPage() {
       }
 
       const { token, ...user } = data.data;
-      console.log(data, token, user);
       localStorage.setItem('token', token);
       dispatch(actions.auth.setAuth(token));
       dispatch(actions.auth.setUser(user));

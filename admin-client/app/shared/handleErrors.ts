@@ -11,11 +11,11 @@ const handleErrors = (error: any) => {
   }
 
   if (error.message !== undefined && error.message.includes(401))
-    error = { errorCode: 401 };
+    error = { statusCode: 401 };
 
   console.log(error);
 
-  switch (error.errorCode) {
+  switch (error.statusCode) {
     case 400:
     case 403:
     case 404:
