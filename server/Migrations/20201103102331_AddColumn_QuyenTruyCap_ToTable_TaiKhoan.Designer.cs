@@ -4,55 +4,55 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Server.Entities;
+using Server.Entity;
 
 namespace server.Migrations
 {
-    [DbContext(typeof(ServerContext))]
-    [Migration("20201103102331_AddColumn_QuyenTruyCap_ToTable_TaiKhoan")]
-    partial class AddColumn_QuyenTruyCap_ToTable_TaiKhoan
+  [DbContext(typeof(ServerContext))]
+  [Migration("20201103102331_AddColumn_QuyenTruyCap_ToTable_TaiKhoan")]
+  partial class AddColumn_QuyenTruyCap_ToTable_TaiKhoan
+  {
+    protected override void BuildTargetModel(ModelBuilder modelBuilder)
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+      modelBuilder
+          .HasAnnotation("ProductVersion", "3.1.9")
+          .HasAnnotation("Relational:MaxIdentifierLength", 128)
+          .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Server.Entities.TaiKhoan", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+      modelBuilder.Entity("Server.Entity.TaiKhoan", b =>
+          {
+            b.Property<long>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("bigint")
+                      .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("Email")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("GioiTinh")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("GioiTinh")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("HoTen")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("HoTen")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MatKhau")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("MatKhau")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("QuyenTruyCap")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("QuyenTruyCap")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SoDienThoai")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("SoDienThoai")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("Username")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("TaiKhoan");
-                });
+            b.ToTable("TaiKhoan");
+          });
 #pragma warning restore 612, 618
-        }
     }
+  }
 }

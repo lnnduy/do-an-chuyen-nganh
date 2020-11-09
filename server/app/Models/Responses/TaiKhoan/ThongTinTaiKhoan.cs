@@ -1,4 +1,4 @@
-using Server.Entities;
+using Server.Entity;
 
 namespace Server.Model.Response
 {

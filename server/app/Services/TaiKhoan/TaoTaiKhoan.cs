@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Server.Entities;
+using Server.Entity;
 using Server.Model.Request;
 using Server.Model.Response;
 

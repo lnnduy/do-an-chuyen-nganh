@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Server.Entities
+namespace Server.Entity
 {
   public class ServerContext : DbContext
   {
     public DbSet<TaiKhoan> TaiKhoanContext { get; set; }
+    public DbSet<HocPhan> HocPhanContext { get; set; }
 
     public ServerContext() : base()
     { }

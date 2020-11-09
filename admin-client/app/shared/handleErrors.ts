@@ -13,8 +13,6 @@ const handleErrors = (error: any) => {
   if (error.message !== undefined && error.message.includes(401))
     error = { statusCode: 401 };
 
-  console.log(error);
-
   switch (error.statusCode) {
     case 400:
     case 403:
@@ -26,7 +24,7 @@ const handleErrors = (error: any) => {
       });
       break;
     case 401: {
-      setTimeout(() => window.location.replace('/login'), 2100);
+      setTimeout(() => window.location.replace('/dang-nhap'), 2100);
       notification.info({
         message: 'Phiên làm việc đã hết hạn',
         description: 'Vui lòng đăng nhập lại.',
