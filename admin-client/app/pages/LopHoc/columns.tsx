@@ -1,5 +1,5 @@
 import { ColumnType } from 'antd/es/table';
-import { idSorter, tenHocPhanSorter } from './sorter';
+import { idSorter, tenLopHocSorter } from './sorter';
 import Actions from './Actions';
 import { SortOrder } from 'antd/lib/table/interface';
 import React from 'react';
@@ -17,14 +17,14 @@ const columns = (
     sortDirections,
   },
   {
-    title: 'Tên học phần',
-    dataIndex: 'tenHocPhan',
-    sorter: tenHocPhanSorter,
+    title: 'Tên lớp học',
+    dataIndex: 'tenLop',
+    sorter: tenLopHocSorter,
     sortDirections,
   },
   {
-    render: (hocPhan) => (
-      <Actions hocPhan={hocPhan} onDeleted={onDeleted} onUpdated={onUpdated} />
+    render: (lopHoc) => (
+      <Actions lopHoc={lopHoc} onDeleted={onDeleted} onUpdated={onUpdated} />
     ),
   },
 ];

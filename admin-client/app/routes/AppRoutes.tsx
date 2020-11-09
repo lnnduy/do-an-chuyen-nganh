@@ -9,6 +9,8 @@ import handleErrors from '../shared/handleErrors';
 import { ReduxStore } from '../store';
 import actions from '../store/actions';
 import { AuthState } from '../store/auth/reducer';
+import PageHocPhan from '../pages/HocPhan/PageHocPhan';
+import PageLopHoc from '../pages/LopHoc/PageLopHoc';
 
 function RedirectRoute() {
   return <Redirect to={routes.TAI_KHOAN} />;
@@ -49,6 +51,8 @@ export default function AppRoutes() {
       <App>
         <Switch>
           <Route exact path={routes.TAI_KHOAN} component={PageTaiKhoan} />
+          <Route exact path={routes.HOC_PHAN} component={PageHocPhan} />
+          <Route exact path={routes.LOP_HOC} component={PageLopHoc} />
           <Route exact path="/" component={RedirectRoute} />
         </Switch>
       </App>

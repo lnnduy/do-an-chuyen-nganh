@@ -20,7 +20,7 @@ import UpdateTaiKhoanModal from './UpdateTaiKhoanModal';
 
 export default function PageTaiKhoan() {
   const dispatch = useDispatch();
-  const [visible, setVisible] = useState(false);
+  const [showAddTaiKhoan, setShowAddTaiKhoan] = useState(false);
   const [loading, setLoading] = useState(false);
   const [dsTaiKhoan, setDsTaiKhoan] = useState(new Array<any>());
   const [showUpdateTaiKhoan, setShowUpdateTaiKhoan] = useState(false);
@@ -49,7 +49,7 @@ export default function PageTaiKhoan() {
 
   const onCreated = (taiKhoan: any) => {
     setDsTaiKhoan([taiKhoan, ...dsTaiKhoan]);
-    setVisible(false);
+    setShowAddTaiKhoan(false);
     setNewTaiKhoan(taiKhoan);
     setShowUpdateTaiKhoan(true);
     notification['success']({
@@ -85,7 +85,7 @@ export default function PageTaiKhoan() {
   }, [loadDsTaiKhoan]);
 
   useEffect(() => {
-    dispatch(actions.app.updateTitle('Trang chủ'));
+    dispatch(actions.app.updateTitle('Quản lý tài khoản'));
   }, []);
 
   return (
@@ -109,7 +109,7 @@ export default function PageTaiKhoan() {
                 type="primary"
                 icon={<UserAddOutlined />}
                 size="large"
-                onClick={() => setVisible(true)}
+                onClick={() => setShowAddTaiKhoan(true)}
               >
                 Thêm tài khoản
               </Button>
@@ -120,13 +120,14 @@ export default function PageTaiKhoan() {
       <Table
         columns={columns(onUpdated, onDeleted)}
         dataSource={dsTaiKhoan}
+        rowKey="id"
         loading={loading}
         bordered
       />
-      {visible && (
+      {showAddTaiKhoan && (
         <AddTaiKhoanModal
-          visible={visible}
-          onCancel={setVisible}
+          visible={showAddTaiKhoan}
+          onCancel={setShowAddTaiKhoan}
           onCreated={onCreated}
         />
       )}

@@ -15,27 +15,27 @@ import api from '../../api';
 import handleErrors from '../../shared/handleErrors';
 import actions from '../../store/actions';
 import columns from './columns';
-import AddHocPhanModal from './AddHocPhanModal';
+import AddLopHocModal from './AddLopHocModal';
 
-function PageHocPhan() {
+function PageLopHoc() {
   const dispatch = useDispatch();
-  const [showAddHocPhan, setShowAddHocPhan] = useState(false);
+  const [showAddLopHoc, setShowAddLopHoc] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [dsHocPhan, setDsHocPhan] = useState(new Array<any>());
+  const [dsLopHoc, setDsLopHoc] = useState(new Array<any>());
 
-  const loadDsHocPhan = useCallback(async () => {
+  const loadDsLopHoc = useCallback(async () => {
     setLoading(true);
 
     try {
-      const res = await api.hocPhan.getDsHocPhan();
+      const res = await api.lopHoc.getDsLopHoc();
 
       if (!res.success) {
         handleErrors(res);
         return;
       }
 
-      const dsHocPhan = res.data;
-      setDsHocPhan(dsHocPhan);
+      const dsLopHoc = res.data;
+      setDsLopHoc(dsLopHoc);
     } catch (error) {
       console.log(error);
       handleErrors(error);
@@ -44,50 +44,50 @@ function PageHocPhan() {
     setLoading(false);
   }, []);
 
-  const onCreated = (hocPhan: any) => {
-    setDsHocPhan([hocPhan, ...dsHocPhan]);
-    setShowAddHocPhan(false);
+  const onCreated = (lopHoc: any) => {
+    setDsLopHoc([lopHoc, ...dsLopHoc]);
+    setShowAddLopHoc(false);
     notification['success']({
       message: 'Thành công',
-      description: `Tạo học phần ${hocPhan.tenHocPhan} thành công`,
+      description: `Tạo lớp học ${lopHoc.tenLop} thành công`,
     });
   };
 
-  const onUpdated = (hocPhan: any) => {
-    const hocPhanIndex = dsHocPhan.findIndex((tk) => tk.id === hocPhan.id);
-    const dsHP = [...dsHocPhan];
-    dsHP.splice(hocPhanIndex, 1, hocPhan);
-    setDsHocPhan(dsHP);
+  const onUpdated = (lopHoc: any) => {
+    const lopHocIndex = dsLopHoc.findIndex((tk) => tk.id === lopHoc.id);
+    const dsHP = [...dsLopHoc];
+    dsHP.splice(lopHocIndex, 1, lopHoc);
+    setDsLopHoc(dsHP);
     notification['success']({
       message: 'Thành công',
-      description: `Cập nhật thông tin học phần ${hocPhan.tenHocPhan} thành công`,
+      description: `Cập nhật thông tin lớp học ${lopHoc.tenLop} thành công`,
     });
   };
 
-  const onDeleted = (hocPhan: any) => {
-    const hocPhanIndex = dsHocPhan.findIndex((tk) => tk.id === hocPhan.id);
-    const dsHP = [...dsHocPhan];
-    dsHP.splice(hocPhanIndex, 1);
-    setDsHocPhan(dsHP);
+  const onDeleted = (lopHoc: any) => {
+    const lopHocIndex = dsLopHoc.findIndex((tk) => tk.id === lopHoc.id);
+    const dsHP = [...dsLopHoc];
+    dsHP.splice(lopHocIndex, 1);
+    setDsLopHoc(dsHP);
     notification['success']({
       message: 'Thành công',
-      description: `Xoá học phần ${hocPhan.tenHocPhan} thành công`,
+      description: `Xoá lớp học ${lopHoc.tenLop} thành công`,
     });
   };
 
   useEffect(() => {
-    loadDsHocPhan();
-  }, [loadDsHocPhan]);
+    loadDsLopHoc();
+  }, [loadDsLopHoc]);
 
   useEffect(() => {
-    dispatch(actions.app.updateTitle('Quản lý học phần'));
+    dispatch(actions.app.updateTitle('Quản lý lớp học'));
   }, []);
 
   return (
     <Space direction="vertical" style={{ width: '100%' }}>
       <Row justify="space-between">
         <Col span={12}>
-          <Input.Search size="large" placeholder="Tìm kiếm học phần" />
+          <Input.Search size="large" placeholder="Tìm kiếm lớp học" />
         </Col>
         <Col span={12}>
           <Row justify="end">
@@ -97,16 +97,16 @@ function PageHocPhan() {
                   type="ghost"
                   icon={<ReloadOutlined />}
                   size="large"
-                  onClick={() => loadDsHocPhan()}
+                  onClick={() => loadDsLopHoc()}
                 />
               </Tooltip>
               <Button
                 type="primary"
                 icon={<UserAddOutlined />}
                 size="large"
-                onClick={() => setShowAddHocPhan(true)}
+                onClick={() => setShowAddLopHoc(true)}
               >
-                Thêm học phần
+                Thêm lớp học
               </Button>
             </Space>
           </Row>
@@ -114,14 +114,14 @@ function PageHocPhan() {
       </Row>
       <Table
         columns={columns(onUpdated, onDeleted)}
-        dataSource={dsHocPhan}
+        dataSource={dsLopHoc}
         loading={loading}
         bordered
       />
-      {showAddHocPhan && (
-        <AddHocPhanModal
-          visible={showAddHocPhan}
-          onCancel={setShowAddHocPhan}
+      {showAddLopHoc && (
+        <AddLopHocModal
+          visible={showAddLopHoc}
+          onCancel={setShowAddLopHoc}
           onCreated={onCreated}
         />
       )}
@@ -129,4 +129,4 @@ function PageHocPhan() {
   );
 }
 
-export default PageHocPhan;
+export default PageLopHoc;
