@@ -6,6 +6,7 @@ namespace Server.Entity
   {
     public DbSet<TaiKhoan> TaiKhoanContext { get; set; }
     public DbSet<HocPhan> HocPhanContext { get; set; }
+    public DbSet<LopHoc> LopHocContext { get; set; }
 
     public ServerContext() : base()
     { }
