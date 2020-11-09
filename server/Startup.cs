@@ -42,6 +42,7 @@ namespace Server
       });
 
       services.AddScoped<ITaiKhoanService, TaiKhoanService>();
+      services.AddScoped<ILopHocService, LopHocService>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

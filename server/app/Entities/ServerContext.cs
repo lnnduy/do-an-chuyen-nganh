@@ -5,6 +5,7 @@ namespace Server.Entities
   public class ServerContext : DbContext
   {
     public DbSet<TaiKhoan> TaiKhoanContext { get; set; }
+    public DbSet<LopHoc> LopHocContext { get; set; }
 
     public ServerContext() : base()
     { }
