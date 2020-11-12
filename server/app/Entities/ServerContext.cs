@@ -8,6 +8,7 @@ namespace Server.Entity
     public DbSet<HocPhan> HocPhanContext { get; set; }
     public DbSet<LopHoc> LopHocContext { get; set; }
     public DbSet<SinhVien> SinhVienContext { get; set; }
+    public DbSet<KhoCauHoi> KhoCauHoiContext { get; set; }
 
     public ServerContext() : base()
     { }
@@ -27,6 +28,12 @@ namespace Server.Entity
         .WithMany(lh => lh.DsSinhVien)
         .HasForeignKey(sv => sv.IdLopHoc)
         .HasConstraintName("FK_LopHoc_SinhVien");
+
+      builder.Entity<KhoCauHoi>()
+        .HasOne(kch => kch.HocPhan)
+        .WithMany(hp => hp.DsKhoCauHoi)
+        .HasForeignKey(kch => kch.IdHocPhan)
+        .HasConstraintName("FK_HocPhan_KhoCauHoi");
     }
   }
 }

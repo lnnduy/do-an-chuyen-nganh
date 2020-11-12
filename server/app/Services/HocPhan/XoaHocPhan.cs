@@ -7,7 +7,7 @@ namespace Server.Service
   {
     public async Task<Response> XoaHocPhan(long id)
     {
-      var existsHocPhan = await _hocPhanRepo.FindHocPhanById(id);
+      var existsHocPhan = await _hocPhanRepo.GetHocPhanById(id);
 
       if (existsHocPhan == null)
         return new Response

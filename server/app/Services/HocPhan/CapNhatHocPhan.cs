@@ -9,7 +9,7 @@ namespace Server.Service
   {
     public async Task<Response<HocPhan>> CapNhatHocPhan(long id, TaoHocPhanRequest request)
     {
-      var existsHocPhan = await _hocPhanRepo.FindHocPhanById(id);
+      var existsHocPhan = await _hocPhanRepo.GetHocPhanById(id);
 
       if (existsHocPhan == null)
         return new Response<HocPhan>

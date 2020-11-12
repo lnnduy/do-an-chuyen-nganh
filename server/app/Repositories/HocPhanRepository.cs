@@ -29,7 +29,7 @@ namespace Server.Repository
       return hocPhan;
     }
 
-    public async Task<HocPhan> FindHocPhanById(long id)
+    public async Task<HocPhan> GetHocPhanById(long id)
     {
       return await _context.HocPhanContext.FindAsync(id);
     }

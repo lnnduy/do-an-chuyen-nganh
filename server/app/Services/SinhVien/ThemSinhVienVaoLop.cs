@@ -9,6 +9,15 @@ namespace Server.Service
   {
     public async Task<Response<SinhVien>> ThemSinhVienVaoLop(long idLopHoc, TaoSinhVienRequest request)
     {
+      var lopHoc = await _lopHocRepo.FindLopHocById(idLopHoc);
+
+      if (lopHoc == null) return new Response<SinhVien>
+      {
+        StatusCode = 400,
+        Success = false,
+        Errors = new[] { "Không tìm thấy lớp học" }
+      };
+
       var sinhVien = new SinhVien
       {
         HoTen = request.HoTen,
