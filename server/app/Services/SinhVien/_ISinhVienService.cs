@@ -10,5 +10,7 @@ namespace Server.Service
   {
     Response<List<SinhVien>> GetDanhSachLop(long idLopHoc);
     Task<Response<SinhVien>> ThemSinhVienVaoLop(long idLopHoc, TaoSinhVienRequest request);
+    Task<Response<SinhVien>> CapNhatSinhVien(long idSinhVien, TaoSinhVienRequest request);
+    Task<Response> XoaSinhVien(long idSinhVien);
   }
 }

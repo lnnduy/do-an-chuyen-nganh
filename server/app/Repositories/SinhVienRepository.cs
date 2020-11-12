@@ -15,9 +15,28 @@ namespace Server.Repository
       return dsSinhVien;
     }
 
+    public async Task<SinhVien> GetSinhVienById(long id)
+    {
+      return await _context.SinhVienContext.FindAsync(id);
+    }
+
     public async Task<SinhVien> CreateSinhVien(SinhVien sinhVien)
     {
       await _context.SinhVienContext.AddAsync(sinhVien);
+      await _context.SaveChangesAsync();
+      return sinhVien;
+    }
+
+    public async Task<SinhVien> UpdateSinhVien(SinhVien sinhVien)
+    {
+      _context.SinhVienContext.Update(sinhVien);
+      await _context.SaveChangesAsync();
+      return sinhVien;
+    }
+
+    public async Task<SinhVien> DeleteSinhVien(SinhVien sinhVien)
+    {
+      _context.SinhVienContext.Remove(sinhVien);
       await _context.SaveChangesAsync();
       return sinhVien;
     }

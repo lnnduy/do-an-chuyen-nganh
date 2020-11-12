@@ -4,31 +4,29 @@ import {
   DeleteOutlined,
   QuestionCircleOutlined,
   EditOutlined,
-  TeamOutlined,
 } from '@ant-design/icons';
-import UpdateLopHocModal from './UpdateLopHocModal';
+import UpdateSinhVienModal from './UpdateSinhVienModal';
 import handleErrors from '../../shared/handleErrors';
 import api from '../../api';
-import { useHistory } from 'react-router';
 
 type Props = {
-  lopHoc: any;
+  idLopHoc: number;
+  sinhVien: any;
   onUpdated: Function;
   onDeleted: Function;
 };
 
-function Actions({ lopHoc, onUpdated, onDeleted }: Props) {
-  const history = useHistory();
-  const [updateLopHoc, setUpdateLopHoc] = useState(false);
+function Actions({ idLopHoc, onUpdated, onDeleted, sinhVien }: Props) {
+  const [updateSinhVien, setUpdateSinhVien] = useState(false);
 
-  const deleteLopHoc = async () => {
+  const deleteSinhVien = async () => {
     try {
-      const res = await api.lopHoc.xoaLopHoc(lopHoc.id);
+      const res = await api.sinhVien.xoaSinhVien(sinhVien.id);
 
       if (!res.success) {
         handleErrors(res);
       } else {
-        onDeleted(lopHoc);
+        onDeleted(sinhVien);
       }
     } catch (error) {
       console.log(error);
@@ -39,36 +37,30 @@ function Actions({ lopHoc, onUpdated, onDeleted }: Props) {
   return (
     <>
       <Space>
-        <Tooltip title="Quản lý học viên">
-          <Button
-            type="text"
-            icon={<TeamOutlined />}
-            onClick={() => history.push(`/lop-hoc/${lopHoc.id}/sinh-vien`)}
-          />
-        </Tooltip>
-        <Tooltip title="Cập nhật lớp học">
+        <Tooltip title="Cập nhật sinh viên">
           <Button
             type="text"
             icon={<EditOutlined />}
-            onClick={() => setUpdateLopHoc(true)}
+            onClick={() => setUpdateSinhVien(true)}
           />
         </Tooltip>
         <Popconfirm
           placement="topRight"
-          title="Xoá lớp học？"
+          title="Xoá sinh viên？"
           icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
-          onConfirm={deleteLopHoc}
+          onConfirm={deleteSinhVien}
         >
-          <Tooltip title="Xoá lớp học">
+          <Tooltip title="Xoá sinh viên">
             <Button type="text" icon={<DeleteOutlined />} />
           </Tooltip>
         </Popconfirm>
       </Space>
-      {updateLopHoc && (
-        <UpdateLopHocModal
-          visible={updateLopHoc}
-          onCancel={setUpdateLopHoc}
-          lopHoc={lopHoc}
+      {updateSinhVien && (
+        <UpdateSinhVienModal
+          visible={updateSinhVien}
+          onCancel={setUpdateSinhVien}
+          sinhVien={sinhVien}
+          idLopHoc={idLopHoc}
           onUpdated={onUpdated}
         />
       )}

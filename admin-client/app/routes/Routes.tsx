@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Title from '../components/Title';
 import SignInPage from '../pages/SignInPage';
 import AppRoutes from './AppRoutes';
-import routes from '../constants/routes.json';
+import routes from '../constants/routes';
 
 function Routes() {
   return (

@@ -1,5 +1,5 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
-import routes from '../constants/routes.json';
+import routes from '../constants/routes';
 import App from '../containers/App';
 import PageTaiKhoan from '../pages/TaiKhoan/PageTaiKhoan';
 import React, { useEffect, useState, useCallback } from 'react';
@@ -11,6 +11,7 @@ import actions from '../store/actions';
 import { AuthState } from '../store/auth/reducer';
 import PageHocPhan from '../pages/HocPhan/PageHocPhan';
 import PageLopHoc from '../pages/LopHoc/PageLopHoc';
+import PageSinhVien from '../pages/SinhVien/PageSinhVien';
 
 function RedirectRoute() {
   return <Redirect to={routes.TAI_KHOAN} />;
@@ -53,6 +54,11 @@ export default function AppRoutes() {
           <Route exact path={routes.TAI_KHOAN} component={PageTaiKhoan} />
           <Route exact path={routes.HOC_PHAN} component={PageHocPhan} />
           <Route exact path={routes.LOP_HOC} component={PageLopHoc} />
+          <Route
+            exact
+            path={routes.LOP_HOC + '/:idLopHoc/sinh-vien'}
+            component={PageSinhVien}
+          />
           <Route exact path="/" component={RedirectRoute} />
         </Switch>
       </App>
