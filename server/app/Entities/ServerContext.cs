@@ -7,6 +7,7 @@ namespace Server.Entity
     public DbSet<TaiKhoan> TaiKhoanContext { get; set; }
     public DbSet<HocPhan> HocPhanContext { get; set; }
     public DbSet<LopHoc> LopHocContext { get; set; }
+    public DbSet<SinhVien> SinhVienContext { get; set; }
 
     public ServerContext() : base()
     { }
@@ -17,6 +18,15 @@ namespace Server.Entity
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
       options.UseSqlServer(@"Server=.\SQLEXPRESS;Database=DoAnChuyenNganh;Trusted_Connection=true");
+    }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+      builder.Entity<SinhVien>()
+        .HasOne(sv => sv.LopHoc)
+        .WithMany(lh => lh.DsSinhVien)
+        .HasForeignKey(sv => sv.IdLopHoc)
+        .HasConstraintName("FK_LopHoc_SinhVien");
     }
   }
 }
