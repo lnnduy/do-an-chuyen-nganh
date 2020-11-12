@@ -3,6 +3,7 @@ import taiKhoan from './taiKhoan';
 import hocPhan from './hocPhan';
 import lopHoc from './lopHoc';
 import sinhVien from './sinhVien';
+import khoCauHoi from './khoCauHoi';
 
 const api = {
   auth,
@@ -10,6 +11,7 @@ const api = {
   hocPhan,
   lopHoc,
   sinhVien,
+  khoCauHoi,
 };
 
 export default api;

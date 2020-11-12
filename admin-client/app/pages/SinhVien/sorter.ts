@@ -29,3 +29,9 @@ export const soDienThoaiSorter: CompareFn<any> = (a1: any, a2: any) => {
   const s2: string = a2.soDienThoai;
   return (s1 || '').localeCompare(s2 || '');
 };
+
+export const diaChiSorter: CompareFn<any> = (a1: any, a2: any) => {
+  const s1: string = a1.diaChi;
+  const s2: string = a2.diaChi;
+  return (s1 || '').localeCompare(s2 || '');
+};

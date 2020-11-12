@@ -5,6 +5,7 @@ import {
   hoTenSorter,
   idSorter,
   soDienThoaiSorter,
+  diaChiSorter,
 } from './sorter';
 import Actions from './Actions';
 import { SortOrder } from 'antd/lib/table/interface';
@@ -56,7 +57,7 @@ const columns = (
   {
     title: 'Địa chỉ',
     dataIndex: 'diaChi',
-    sorter: soDienThoaiSorter,
+    sorter: diaChiSorter,
     sortDirections,
     render: Cell,
   },

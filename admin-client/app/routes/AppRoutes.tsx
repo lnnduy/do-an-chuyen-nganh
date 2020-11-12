@@ -12,6 +12,7 @@ import { AuthState } from '../store/auth/reducer';
 import PageHocPhan from '../pages/HocPhan/PageHocPhan';
 import PageLopHoc from '../pages/LopHoc/PageLopHoc';
 import PageSinhVien from '../pages/SinhVien/PageSinhVien';
+import PageKhoCauHoi from '../pages/KhoCauHoi/PageKhoCauHoi';
 
 function RedirectRoute() {
   return <Redirect to={routes.TAI_KHOAN} />;
@@ -58,6 +59,11 @@ export default function AppRoutes() {
             exact
             path={routes.LOP_HOC + '/:idLopHoc/sinh-vien'}
             component={PageSinhVien}
+          />
+          <Route
+            exact
+            path={routes.HOC_PHAN + '/:idHocPhan/kho-cau-hoi'}
+            component={PageKhoCauHoi}
           />
           <Route exact path="/" component={RedirectRoute} />
         </Switch>
