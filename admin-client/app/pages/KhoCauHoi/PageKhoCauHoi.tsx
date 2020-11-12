@@ -104,7 +104,7 @@ function PageKhoCauHoi({ match }: Props) {
         <Button
           type="link"
           icon={<ArrowLeftOutlined />}
-          onClick={() => history.push(ROUTES.LOP_HOC)}
+          onClick={() => history.push(ROUTES.HOC_PHAN)}
         >
           Quay lại
         </Button>

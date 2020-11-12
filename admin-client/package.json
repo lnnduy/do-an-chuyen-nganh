@@ -71,7 +71,8 @@
       "output": "release"
     },
     "extraResources": [
-      "./resources/**"
+      "./resources/**",
+      "./app/assets/**"
     ]
   },
   "license": "MIT",
