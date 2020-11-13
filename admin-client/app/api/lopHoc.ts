@@ -16,6 +16,19 @@ async function getDsLopHoc(): Promise<any> {
   }
 }
 
+async function getLopHoc(id: number): Promise<any> {
+  let res = null;
+  try {
+    const { data } = await api.get(`${id}`);
+    res = data;
+    return data;
+  } catch (error) {
+    handleErrors(error);
+    console.log(error);
+    return res;
+  }
+}
+
 async function taoLopHoc(lopHoc: any): Promise<any> {
   let res = null;
   try {
@@ -57,6 +70,7 @@ async function xoaLopHoc(id: number): Promise<any> {
 
 export default {
   getDsLopHoc,
+  getLopHoc,
   taoLopHoc,
   capNhatLopHoc,
   xoaLopHoc,

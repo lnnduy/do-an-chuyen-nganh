@@ -7,6 +7,7 @@ import {
   Button,
   Table,
   notification,
+  Typography,
 } from 'antd';
 import {
   ReloadOutlined,
@@ -33,6 +34,7 @@ function PageSinhVien({ match }: Props) {
   const [showAddSinhVien, setShowAddSinhVien] = useState(false);
   const [loading, setLoading] = useState(false);
   const [dsSinhVien, setDsSinhVien] = useState(new Array<any>());
+  const [lopHoc, setLopHoc] = useState<any>(null);
 
   const loadDsSinhVien = useCallback(async () => {
     setLoading(true);
@@ -52,6 +54,22 @@ function PageSinhVien({ match }: Props) {
     }
 
     setLoading(false);
+  }, []);
+
+  const loadLopHoc = useCallback(async () => {
+    try {
+      const res = await api.lopHoc.getLopHoc(match.params.idLopHoc);
+
+      if (!res.success) {
+        handleErrors(res);
+        return;
+      }
+
+      const lopHoc = res.data;
+      setLopHoc(lopHoc);
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const onCreated = (sinhVien: any) => {
@@ -90,6 +108,10 @@ function PageSinhVien({ match }: Props) {
   }, [loadDsSinhVien]);
 
   useEffect(() => {
+    loadLopHoc();
+  }, [loadLopHoc]);
+
+  useEffect(() => {
     dispatch(actions.app.updateTitle('Quản lý sinh viên'));
   }, []);
 
@@ -103,6 +125,11 @@ function PageSinhVien({ match }: Props) {
         >
           Quay lại
         </Button>
+      </Row>
+      <Row>
+        {!!lopHoc && (
+          <Typography.Title level={4}>Lớp: {lopHoc.tenLop}</Typography.Title>
+        )}
       </Row>
       <Row justify="space-between">
         <Col span={12}>
