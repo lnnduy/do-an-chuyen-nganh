@@ -5,6 +5,9 @@
 main.ant-layout-content.site-layout-background {
   background-color: #303030;
   color: white;
+  overflow: auto;
+  max-height: calc(100vh - 94px);
+  margin: 0 !important;
 }
 
 h1,

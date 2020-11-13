@@ -116,7 +116,7 @@ function PageSinhVien({ match }: Props) {
   }, []);
 
   return (
-    <Space direction="vertical" style={{ width: '100%' }}>
+    <Space direction="vertical" style={{ width: '100%' }} size="large">
       <Row>
         <Button
           type="link"

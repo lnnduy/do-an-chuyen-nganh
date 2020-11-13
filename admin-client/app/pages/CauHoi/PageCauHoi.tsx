@@ -1,13 +1,13 @@
 import {
   Button,
-  Card,
-  Col,
   Input,
   notification,
   Row,
   Space,
   Tooltip,
   Typography,
+  Empty,
+  Col,
 } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
@@ -21,12 +21,15 @@ import api from '../../api';
 import handleErrors from '../../shared/handleErrors';
 import CardCauHoi from '../../components/CardCauHoi';
 import AddCauHoiModal from './AddCauHoiModal';
+import actions from '../../store/actions';
+import { useDispatch } from 'react-redux';
 
 type Props = {
   match: any;
 };
 
 function PageCauHoi({ match }: Props) {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [khoCauHoi, setKhoCauHoi] = useState<any>(null);
   const [dsCauHoi, setDsCauHoi] = useState<any>([]);
@@ -79,8 +82,12 @@ function PageCauHoi({ match }: Props) {
     loadDsCauHoi();
   }, [loadDsCauHoi]);
 
+  useEffect(() => {
+    dispatch(actions.app.updateTitle('Quản lý câu hỏi'));
+  }, []);
+
   return (
-    <Space direction="vertical" style={{ width: '100%' }}>
+    <Space direction="vertical" style={{ width: '100%' }} size="large">
       <Row>
         <Button
           type="link"
@@ -128,13 +135,25 @@ function PageCauHoi({ match }: Props) {
           </Row>
         </Col>
       </Row>
-      <Row gutter={[10, 10]}>
-        {dsCauHoi.map((cauHoi: any) => (
-          <Col key={cauHoi.id} span={8}>
-            <CardCauHoi cauHoi={cauHoi} />
-          </Col>
-        ))}
-      </Row>
+      {(dsCauHoi.length > 0 && (
+        <Row gutter={[10, 10]}>
+          {dsCauHoi.map((cauHoi: any) => (
+            <Col key={cauHoi.id} span={8}>
+              <CardCauHoi cauHoi={cauHoi} />
+            </Col>
+          ))}
+        </Row>
+      )) || (
+        <Row justify="center" style={{ marginTop: 30 }}>
+          <Empty
+            description={
+              <p>
+                <i>Không có câu hỏi nào trong kho câu hỏi này</i>
+              </p>
+            }
+          />
+        </Row>
+      )}
       {showAddCauHoi && (
         <AddCauHoiModal
           visible={showAddCauHoi}

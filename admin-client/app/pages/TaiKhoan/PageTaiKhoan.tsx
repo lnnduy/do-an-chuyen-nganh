@@ -88,7 +88,7 @@ export default function PageTaiKhoan() {
   }, []);
 
   return (
-    <Space direction="vertical" style={{ width: '100%' }}>
+    <Space direction="vertical" style={{ width: '100%' }} size="large">
       <Row justify="space-between">
         <Col span={12}>
           <Input.Search size="large" placeholder="Tìm kiếm tài khoản" />
