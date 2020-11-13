@@ -1,3 +1,4 @@
+import handleErrors from '../shared/handleErrors';
 import axiosInstance from './axiosInstance';
 
 const apiHocPhan = axiosInstance('hoc-phan');
@@ -10,6 +11,7 @@ async function getDsKhoCauHoi(idHocPhan: number): Promise<any> {
     res = data;
     return data;
   } catch (error) {
+    handleErrors(error);
     console.log(error);
     return res;
   }
@@ -27,6 +29,7 @@ async function themKhoCauHoiVaoHocPhan(
     res = data;
     return data;
   } catch (error) {
+    handleErrors(error);
     console.log(error);
     return res;
   }
@@ -41,6 +44,7 @@ async function capNhatKhoCauHoi(id: number, khoCauHoi: any): Promise<any> {
     res = data;
     return data;
   } catch (error) {
+    handleErrors(error);
     console.log(error);
     return res;
   }
@@ -53,6 +57,7 @@ async function xoaKhoCauHoi(id: number): Promise<any> {
     res = data;
     return data;
   } catch (error) {
+    handleErrors(error);
     console.log(error);
     return res;
   }

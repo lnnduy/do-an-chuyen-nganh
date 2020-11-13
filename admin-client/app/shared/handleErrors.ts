@@ -24,7 +24,8 @@ const handleErrors = (error: any) => {
       });
       break;
     case 401: {
-      setTimeout(() => window.location.replace('/dang-nhap'), 2100);
+      const rootPath = window.location.href.split('#')[0] + '#';
+      setTimeout(() => window.location.replace(`${rootPath}/dang-nhap`), 2100);
       notification.info({
         message: 'Phiên làm việc đã hết hạn',
         description: 'Vui lòng đăng nhập lại.',

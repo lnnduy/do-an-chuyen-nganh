@@ -30,7 +30,6 @@ function Actions({ idHocPhan, onUpdated, onDeleted, khoCauHoi }: Props) {
       }
     } catch (error) {
       console.log(error);
-      handleErrors(error);
     }
   };
 

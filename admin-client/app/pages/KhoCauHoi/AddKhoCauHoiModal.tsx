@@ -35,7 +35,6 @@ function AddKhoCauHoiModal({ visible, onCancel, onCreated, idHocPhan }: Props) {
 
       onCreated(res.data);
     } catch (error) {
-      handleErrors(error);
       console.log(error);
       setFailed(true);
     }

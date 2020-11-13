@@ -1,3 +1,4 @@
+import handleErrors from '../shared/handleErrors';
 import axiosInstance from './axiosInstance';
 
 const apiLopHoc = axiosInstance('lop-hoc');
@@ -10,6 +11,7 @@ async function getDanhSachLop(idLopHoc: number): Promise<any> {
     res = data;
     return data;
   } catch (error) {
+    handleErrors(error);
     console.log(error);
     return res;
   }
@@ -27,6 +29,7 @@ async function themSinhVienVaoLop(
     res = data;
     return data;
   } catch (error) {
+    handleErrors(error);
     console.log(error);
     return res;
   }
@@ -41,6 +44,7 @@ async function capNhatSinhVien(id: number, sinhVien: any): Promise<any> {
     res = data;
     return data;
   } catch (error) {
+    handleErrors(error);
     console.log(error);
     return res;
   }
@@ -53,6 +57,7 @@ async function xoaSinhVien(id: number): Promise<any> {
     res = data;
     return data;
   } catch (error) {
+    handleErrors(error);
     console.log(error);
     return res;
   }

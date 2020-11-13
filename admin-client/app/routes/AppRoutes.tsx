@@ -38,7 +38,7 @@ export default function AppRoutes() {
         dispatch(actions.auth.setUser(res.data));
       }
     } catch (error) {
-      handleErrors(error);
+      console.log(error);
     }
 
     setTriedLogin(true);

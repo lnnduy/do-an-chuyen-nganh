@@ -41,7 +41,6 @@ export default function PageTaiKhoan() {
       setDsTaiKhoan(dsTaiKhoan);
     } catch (error) {
       console.log(error);
-      handleErrors(error);
     }
 
     setLoading(false);

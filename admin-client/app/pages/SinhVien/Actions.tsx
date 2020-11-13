@@ -30,7 +30,6 @@ function Actions({ idLopHoc, onUpdated, onDeleted, sinhVien }: Props) {
       }
     } catch (error) {
       console.log(error);
-      handleErrors(error);
     }
   };
 

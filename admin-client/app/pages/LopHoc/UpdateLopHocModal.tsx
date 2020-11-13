@@ -42,7 +42,6 @@ function UpdateLopHocModal({ visible, onCancel, onUpdated, lopHoc }: Props) {
         }
       } else onUpdated(res.data);
     } catch (error) {
-      handleErrors(error);
       console.log(error);
       setFailed(true);
     } finally {

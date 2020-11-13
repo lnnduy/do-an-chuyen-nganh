@@ -49,7 +49,6 @@ function PageSinhVien({ match }: Props) {
       setDsSinhVien(dsSinhVien);
     } catch (error) {
       console.log(error);
-      handleErrors(error);
     }
 
     setLoading(false);

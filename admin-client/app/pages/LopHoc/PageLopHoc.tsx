@@ -38,7 +38,6 @@ function PageLopHoc() {
       setDsLopHoc(dsLopHoc);
     } catch (error) {
       console.log(error);
-      handleErrors(error);
     }
 
     setLoading(false);
