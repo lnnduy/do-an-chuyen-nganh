@@ -132,7 +132,7 @@ function PageKhoCauHoi({ match }: Props) {
       </Row>
       <Row>
         {!!hocPhan && (
-          <Typography.Title level={4}>
+          <Typography.Title level={3}>
             Học phần: {hocPhan.tenHocPhan}
           </Typography.Title>
         )}

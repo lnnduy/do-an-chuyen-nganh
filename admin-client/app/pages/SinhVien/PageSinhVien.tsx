@@ -128,7 +128,7 @@ function PageSinhVien({ match }: Props) {
       </Row>
       <Row>
         {!!lopHoc && (
-          <Typography.Title level={4}>Lớp: {lopHoc.tenLop}</Typography.Title>
+          <Typography.Title level={3}>Lớp: {lopHoc.tenLop}</Typography.Title>
         )}
       </Row>
       <Row justify="space-between">

@@ -3,11 +3,13 @@ import { Button, Popconfirm, Space, Tooltip } from 'antd';
 import {
   DeleteOutlined,
   QuestionCircleOutlined,
+  QuestionOutlined,
   EditOutlined,
 } from '@ant-design/icons';
 import UpdateKhoCauHoiModal from './UpdateKhoCauHoiModal';
 import handleErrors from '../../shared/handleErrors';
 import api from '../../api';
+import { useHistory } from 'react-router';
 
 type Props = {
   idHocPhan: number;
@@ -17,6 +19,7 @@ type Props = {
 };
 
 function Actions({ idHocPhan, onUpdated, onDeleted, khoCauHoi }: Props) {
+  const history = useHistory();
   const [updateKhoCauHoi, setUpdateKhoCauHoi] = useState(false);
 
   const deleteKhoCauHoi = async () => {
@@ -36,6 +39,13 @@ function Actions({ idHocPhan, onUpdated, onDeleted, khoCauHoi }: Props) {
   return (
     <>
       <Space>
+        <Tooltip title="Quản lý câu hỏi">
+          <Button
+            type="text"
+            icon={<QuestionOutlined />}
+            onClick={() => history.push(`kho-cau-hoi/${khoCauHoi.id}/cau-hoi`)}
+          />
+        </Tooltip>
         <Tooltip title="Cập nhật kho câu hỏi">
           <Button
             type="text"

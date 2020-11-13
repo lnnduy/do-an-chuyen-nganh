@@ -1,0 +1,27 @@
+.card-cau-hoi {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-cau-hoi > .ant-card-body {
+  flex: auto;
+  transition: all 0.3s;
+}
+
+.card-cau-hoi > .ant-card-body:hover {
+  background-color: #202020;
+}
+
+.card-cau-hoi > .ant-card-body .card-dap-an-dung > .ant-card-body,
+.card-cau-hoi > .ant-card-body .card-dap-an-sai > .ant-card-body {
+  transition: all 0.3s;
+}
+
+.card-cau-hoi > .ant-card-body .card-dap-an-dung:hover > .ant-card-body {
+  background-color: #4ef9b020;
+}
+
+.card-cau-hoi > .ant-card-body .card-dap-an-sai:hover > .ant-card-body {
+  background-color: #ff504520;
+}
