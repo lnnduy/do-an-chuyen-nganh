@@ -16,6 +16,19 @@ async function getDsHocPhan(): Promise<any> {
   }
 }
 
+async function getHocPhan(id: number): Promise<any> {
+  let res = null;
+  try {
+    const { data } = await api.get(`${id}`);
+    res = data;
+    return data;
+  } catch (error) {
+    handleErrors(error);
+    console.log(error);
+    return res;
+  }
+}
+
 async function taoHocPhan(hocPhan: any): Promise<any> {
   let res = null;
   try {
@@ -57,6 +70,7 @@ async function xoaHocPhan(id: number): Promise<any> {
 
 export default {
   getDsHocPhan,
+  getHocPhan,
   taoHocPhan,
   capNhatHocPhan,
   xoaHocPhan,

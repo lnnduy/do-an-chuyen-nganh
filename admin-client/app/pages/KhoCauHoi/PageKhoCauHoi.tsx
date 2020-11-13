@@ -7,6 +7,7 @@ import {
   Button,
   Table,
   notification,
+  Typography,
 } from 'antd';
 import {
   ReloadOutlined,
@@ -33,6 +34,7 @@ function PageKhoCauHoi({ match }: Props) {
   const [showAddKhoCauHoi, setShowAddKhoCauHoi] = useState(false);
   const [loading, setLoading] = useState(false);
   const [dsKhoCauHoi, setDsKhoCauHoi] = useState(new Array<any>());
+  const [hocPhan, setHocPhan] = useState<any>(null);
 
   const loadDsKhoCauHoi = useCallback(async () => {
     setLoading(true);
@@ -52,6 +54,22 @@ function PageKhoCauHoi({ match }: Props) {
     }
 
     setLoading(false);
+  }, []);
+
+  const loadHocPhan = useCallback(async () => {
+    try {
+      const res = await api.hocPhan.getHocPhan(match.params.idHocPhan);
+
+      if (!res.success) {
+        handleErrors(res);
+        return;
+      }
+
+      const hocPhan = res.data;
+      setHocPhan(hocPhan);
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const onCreated = (khoCauHoi: any) => {
@@ -94,6 +112,10 @@ function PageKhoCauHoi({ match }: Props) {
   }, [loadDsKhoCauHoi]);
 
   useEffect(() => {
+    loadHocPhan();
+  }, [loadHocPhan]);
+
+  useEffect(() => {
     dispatch(actions.app.updateTitle('Quản lý kho câu hỏi'));
   }, []);
 
@@ -107,6 +129,13 @@ function PageKhoCauHoi({ match }: Props) {
         >
           Quay lại
         </Button>
+      </Row>
+      <Row>
+        {!!hocPhan && (
+          <Typography.Title level={4}>
+            Học phần: {hocPhan.tenHocPhan}
+          </Typography.Title>
+        )}
       </Row>
       <Row justify="space-between">
         <Col span={12}>
