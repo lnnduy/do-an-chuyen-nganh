@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,5 +15,6 @@ namespace Server.Entity
     public long IdHocPhan { get; set; }
 
     public virtual HocPhan HocPhan { get; set; }
+    public virtual List<CauHoi> DsCauHoi { get; set; }
   }
 }

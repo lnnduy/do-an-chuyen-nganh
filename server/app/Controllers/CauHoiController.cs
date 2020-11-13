@@ -9,69 +9,68 @@ namespace Server.Controller
 {
   [Authorize]
   [ApiController]
-  [Route("api/lop-hoc/{idLopHoc}/sinh-vien")]
-  public partial class SinhVienController : ControllerBase
+  [Route("api/kho-cau-hoi/{idKhoCauHoi}/cau-hoi")]
+  public partial class CauHoiController : ControllerBase
   {
-    private readonly ISinhVienService _sinhVienService;
+    private readonly ICauHoiService _cauHoiService;
 
-    public SinhVienController(ISinhVienService sinhVienService)
+    public CauHoiController(ICauHoiService cauHoiService)
     {
-      _sinhVienService = sinhVienService;
+      _cauHoiService = cauHoiService;
     }
 
     [HttpGet("")]
-    public IActionResult GetDanhSachLop(long idLopHoc)
+    public async Task<IActionResult> GetDsCauHoi(long idKhoCauHoi)
     {
       var claim = User.Claims.FirstOrDefault(c => c.Type == "id");
 
       if (!User.Identity.IsAuthenticated || claim == null)
         return Unauthorized();
 
-      var serviceResult = _sinhVienService.GetDanhSachLop(idLopHoc);
+      var serviceResult = await _cauHoiService.GetDsCauHoi(idKhoCauHoi);
 
       return Ok(serviceResult);
     }
 
     [HttpPost("")]
-    public async Task<IActionResult> ThemSinhVienVaoLop(long idLopHoc, TaoSinhVienRequest request)
+    public async Task<IActionResult> ThemCauHoiVaoKhoCauHoi(long idKhoCauHoi, TaoCauHoiRequest request)
     {
       var claim = User.Claims.FirstOrDefault(c => c.Type == "id");
 
       if (!User.Identity.IsAuthenticated || claim == null)
         return Unauthorized();
 
-      var serviceResult = await _sinhVienService.ThemSinhVienVaoLop(idLopHoc, request);
+      var serviceResult = await _cauHoiService.ThemCauHoiVaoKhoCauHoi(idKhoCauHoi, request);
 
       return Ok(serviceResult);
     }
   }
 
-  [Authorize]
-  [Route("api/sinh-vien")]
-  public partial class SinhVienController : ControllerBase
+  [Route("api/cau-hoi/{id}")]
+  public partial class CauHoiController : ControllerBase
   {
-    [HttpPut("{id}")]
-    public async Task<IActionResult> CapNhatSinhVien(long id, TaoSinhVienRequest request)
+    [HttpPut("")]
+    public async Task<IActionResult> GetDsCauHoi(long id, CapNhatCauHoiRequest request)
     {
       var claim = User.Claims.FirstOrDefault(c => c.Type == "id");
 
       if (!User.Identity.IsAuthenticated || claim == null)
         return Unauthorized();
 
-      var serviceResult = await _sinhVienService.CapNhatSinhVien(id, request);
+      var serviceResult = await _cauHoiService.CapNhatCauHoi(id, request);
 
       return Ok(serviceResult);
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> XoaSinhVien(long id)
+    [HttpDelete("")]
+    public async Task<IActionResult> XoaCauHoi(long id)
     {
       var claim = User.Claims.FirstOrDefault(c => c.Type == "id");
 
       if (!User.Identity.IsAuthenticated || claim == null)
         return Unauthorized();
 
-      var serviceResult = await _sinhVienService.XoaSinhVien(id);
+      var serviceResult = await _cauHoiService.XoaCauHoi(id);
 
       return Ok(serviceResult);
     }

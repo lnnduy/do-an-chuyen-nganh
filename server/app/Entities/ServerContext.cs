@@ -9,6 +9,8 @@ namespace Server.Entity
     public DbSet<LopHoc> LopHocContext { get; set; }
     public DbSet<SinhVien> SinhVienContext { get; set; }
     public DbSet<KhoCauHoi> KhoCauHoiContext { get; set; }
+    public DbSet<CauHoi> CauHoiContext { get; set; }
+    public DbSet<DapAn> DapAnContext { get; set; }
 
     public ServerContext() : base()
     { }
@@ -18,7 +20,8 @@ namespace Server.Entity
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-      options.UseSqlServer(@"Server=.\SQLEXPRESS;Database=DoAnChuyenNganh;Trusted_Connection=true");
+      options.UseSqlServer(@"Server=.\SQLEXPRESS;Database=DoAnChuyenNganh;Trusted_Connection=true")
+        .EnableSensitiveDataLogging();
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -34,6 +37,18 @@ namespace Server.Entity
         .WithMany(hp => hp.DsKhoCauHoi)
         .HasForeignKey(kch => kch.IdHocPhan)
         .HasConstraintName("FK_HocPhan_KhoCauHoi");
+
+      builder.Entity<CauHoi>()
+        .HasOne(ch => ch.KhoCauHoi)
+        .WithMany(kch => kch.DsCauHoi)
+        .HasForeignKey(ch => ch.IdKhoCauHoi)
+        .HasConstraintName("FK_KhoCauHoi_CauHoi");
+
+      builder.Entity<DapAn>()
+        .HasOne(da => da.CauHoi)
+        .WithMany(ch => ch.DsDapAn)
+        .HasForeignKey(da => da.IdCauHoi)
+        .HasConstraintName("FK_CauHoi_DapAn");
     }
   }
 }

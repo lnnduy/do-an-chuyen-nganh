@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Entity;
 
 namespace server.Migrations
 {
     [DbContext(typeof(ServerContext))]
-    partial class ServerContextModelSnapshot : ModelSnapshot
+    [Migration("20201112100456_AddTable_DapAn")]
+    partial class AddTable_DapAn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,9 +30,6 @@ namespace server.Migrations
                     b.Property<string>("DoKho")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("IdKhoCauHoi")
-                        .HasColumnType("bigint");
-
                     b.Property<bool>("NhieuDapAn")
                         .HasColumnType("bit");
 
@@ -38,8 +37,6 @@ namespace server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdKhoCauHoi");
 
                     b.ToTable("CauHoi");
                 });
@@ -186,16 +183,6 @@ namespace server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TaiKhoan");
-                });
-
-            modelBuilder.Entity("Server.Entity.CauHoi", b =>
-                {
-                    b.HasOne("Server.Entity.KhoCauHoi", "KhoCauHoi")
-                        .WithMany("DsCauHoi")
-                        .HasForeignKey("IdKhoCauHoi")
-                        .HasConstraintName("FK_KhoCauHoi_CauHoi")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Server.Entity.DapAn", b =>
