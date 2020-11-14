@@ -1,22 +1,26 @@
 import { Card, Space, Tooltip, Typography, Popconfirm } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   EditOutlined,
   DeleteOutlined,
   CloseCircleOutlined,
 } from '@ant-design/icons';
+import UpdateCauHoiModal from '../pages/CauHoi/UpdateCauHoiModal';
 
 type Props = {
   cauHoi: any;
+  onUpdated: Function;
 };
 
-function CardCauHoi({ cauHoi }: Props) {
+function CardCauHoi({ cauHoi, onUpdated }: Props) {
+  const [showUpdateCauHoi, setShowUpdateCauHoi] = useState(false);
+
   return (
     <Card
       className="card-cau-hoi"
       actions={[
         <Tooltip title="Cập nhật câu hỏi">
-          <EditOutlined />
+          <EditOutlined onClick={() => setShowUpdateCauHoi(true)} />
         </Tooltip>,
         <Popconfirm
           title="Xoá câu hỏi"
@@ -51,6 +55,18 @@ function CardCauHoi({ cauHoi }: Props) {
           </Card>
         ))}
       </Space>
+
+      {showUpdateCauHoi && (
+        <UpdateCauHoiModal
+          cauHoi={cauHoi}
+          visible={showUpdateCauHoi}
+          onCancel={() => setShowUpdateCauHoi(false)}
+          onUpdated={(cauHoi: any) => {
+            onUpdated(cauHoi);
+            setShowUpdateCauHoi(false);
+          }}
+        />
+      )}
     </Card>
   );
 }

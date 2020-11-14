@@ -8,6 +8,7 @@ import {
   Typography,
   Empty,
   Col,
+  Spin,
 } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
@@ -32,8 +33,9 @@ function PageCauHoi({ match }: Props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const [khoCauHoi, setKhoCauHoi] = useState<any>(null);
-  const [dsCauHoi, setDsCauHoi] = useState<any>([]);
+  const [dsCauHoi, setDsCauHoi] = useState<any[]>([]);
   const [showAddCauHoi, setShowAddCauHoi] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const loadKhoCauHoi = useCallback(async () => {
     const res = await api.khoCauHoi.getKhoCauHoi(+match.params.idKhoCauHoi);
@@ -53,7 +55,11 @@ function PageCauHoi({ match }: Props) {
   }, [loadKhoCauHoi]);
 
   const loadDsCauHoi = useCallback(async () => {
+    setLoading(true);
+
     const res = await api.cauHoi.getDsCauHoi(+match.params.idKhoCauHoi);
+
+    setLoading(false);
 
     if (!res.success) {
       console.log(res.errors);
@@ -70,7 +76,20 @@ function PageCauHoi({ match }: Props) {
     setShowAddCauHoi(false);
     notification.success({
       message: 'Thành công',
-      description: `Xoá sinh viên ${cauHoi.noiDung} thành công`,
+      description: `Thêm câu hỏi ${cauHoi.noiDung} thành công`,
+    });
+  };
+
+  const onUpdated = (cauHoi: any) => {
+    const cauHoiIndex = dsCauHoi.findIndex((ch: any) => ch.id === cauHoi.id);
+    setDsCauHoi([
+      ...dsCauHoi.slice(0, cauHoiIndex),
+      cauHoi,
+      ...dsCauHoi.slice(cauHoiIndex + 1),
+    ]);
+    notification.success({
+      message: 'Thành công',
+      description: `Cập nhật câu hỏi ${cauHoi.noiDung} thành công`,
     });
   };
 
@@ -115,6 +134,15 @@ function PageCauHoi({ match }: Props) {
         <Col span={12}>
           <Row justify="end">
             <Space>
+              <span
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                {loading && <Spin />}
+              </span>
               <Tooltip title="Tải lại">
                 <Button
                   type="ghost"
@@ -139,7 +167,7 @@ function PageCauHoi({ match }: Props) {
         <Row gutter={[10, 10]}>
           {dsCauHoi.map((cauHoi: any) => (
             <Col key={cauHoi.id} span={8}>
-              <CardCauHoi cauHoi={cauHoi} />
+              <CardCauHoi cauHoi={cauHoi} onUpdated={onUpdated} />
             </Col>
           ))}
         </Row>

@@ -1,55 +1,64 @@
 import {
+  Input,
+  Select,
+  Radio,
+  Space,
+  Row,
   Button,
   Col,
   Form,
-  Input,
   Modal,
-  Radio,
-  Row,
-  Select,
-  Space,
 } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
-import DO_KHO_CAU_HOI from '../../constants/do-kho-cau-hoi';
-import { PlusOutlined } from '@ant-design/icons';
-import CardDapAn from '../../components/CardDapAn';
 import api from '../../api';
+import CardDapAn from '../../components/CardDapAn';
+import DO_KHO_CAU_HOI from '../../constants/do-kho-cau-hoi';
 import handleErrors from '../../shared/handleErrors';
+import { PlusOutlined } from '@ant-design/icons';
 
 type Props = {
-  idKhoCauHoi: number;
   visible: boolean;
-  onCreated: Function;
+  onUpdated: Function;
   onCancel: Function;
+  cauHoi: any;
 };
 
-function AddCauHoiModal({ visible, onCancel, idKhoCauHoi, onCreated }: Props) {
+function UpdateCauHoiModal({ visible, onCancel, onUpdated, cauHoi }: Props) {
   const formRef = useRef<any>();
   const [dsDapAn, setDsDapAn] = useState(new Array<any>());
   const [nhieuDapAn, setNhieuDapAn] = useState<any>(null);
   const [dsIndexDapAnDung, setDsIndexDapAnDung] = useState<number[]>([]);
   const [fields, setFields] = useState<any[]>([]);
+  const [dsIdDapAnCanXoa, setDsIdDapAnCanXoa] = useState<number[]>([]);
 
-  const taoCauHoi = async (form?: any) => {
+  const capNhatCauHoi = async (form?: any) => {
     if (form === undefined) {
       formRef.current?.submit();
       return;
     }
-    const taoCauHoiRequest = { ...form, dsDapAn };
+
+    const capNhatCauHoiRequest = { ...form };
+    capNhatCauHoiRequest.dsDapAnMoi = dsDapAn.filter(
+      (da: any) => da.id === undefined
+    );
+    capNhatCauHoiRequest.dsDapAnCanCapNhat = dsDapAn.filter(
+      (da: any) => da.id !== undefined
+    );
+    capNhatCauHoiRequest.dsDapAnCanXoa = dsIdDapAnCanXoa;
 
     try {
-      const res = await api.cauHoi.themCauHoiVaoKhoCauHoi(
-        idKhoCauHoi,
-        taoCauHoiRequest
+      const res = await api.cauHoi.capNhatCauHoi(
+        cauHoi.id,
+        capNhatCauHoiRequest
       );
 
       if (!res.success) {
         handleErrors(res);
+        console.log(res.errors);
         return;
       }
 
-      const cauHoi = res.data;
-      onCreated(cauHoi);
+      onUpdated(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -122,6 +131,7 @@ function AddCauHoiModal({ visible, onCancel, idKhoCauHoi, onCreated }: Props) {
   };
 
   const deleteDapAn = (index: number) => {
+    setDsIdDapAnCanXoa([dsDapAn[index].id, ...dsIdDapAnCanXoa]);
     setDsDapAn([...dsDapAn.slice(0, index), ...dsDapAn.slice(index + 1)]);
     if (dsDapAn.length === 1) setDsIndexDapAnDung([]);
     else if (
@@ -139,8 +149,9 @@ function AddCauHoiModal({ visible, onCancel, idKhoCauHoi, onCreated }: Props) {
           ...dsDapAn.slice(1, index),
           ...dsDapAn.slice(index + 1),
         ]);
-      else
+      else {
         setDsDapAn([{ ...dsDapAn[1], dapAnDung: true }, ...dsDapAn.slice(2)]);
+      }
     } else
       setDsIndexDapAnDung(
         dsIndexDapAnDung
@@ -153,35 +164,47 @@ function AddCauHoiModal({ visible, onCancel, idKhoCauHoi, onCreated }: Props) {
     setFields([
       {
         name: ['noiDung'],
-        value: '',
+        value: cauHoi.noiDung,
         touched: false,
         errors: [],
         validating: false,
       },
       {
         name: ['doKho'],
-        value: DO_KHO_CAU_HOI.DE,
+        value: cauHoi.doKho,
         touched: false,
         errors: [],
         validating: false,
       },
       {
         name: ['nhieuDapAn'],
-        value: false,
+        value: cauHoi.nhieuDapAn,
         touched: false,
         errors: [],
         validating: false,
       },
     ]);
-  }, []);
+  }, [cauHoi]);
+
+  useEffect(() => {
+    setDsDapAn(cauHoi.dsDapAn);
+  }, [cauHoi]);
+
+  useEffect(() => {
+    setDsIndexDapAnDung(
+      cauHoi.dsDapAn
+        .map((da: any, i: number) => (da.dapAnDung === true ? i : null))
+        .filter((i: number | null) => i !== null)
+    );
+  }, [cauHoi]);
 
   return (
     <Modal
-      title="Tạo câu hỏi"
+      title="Cập nhật câu hỏi"
       visible={visible}
       onCancel={() => onCancel()}
-      onOk={() => taoCauHoi()}
-      okText="Tạo câu hỏi"
+      onOk={() => capNhatCauHoi()}
+      okText="Cập nhật câu hỏi"
       cancelText="Huỷ"
       centered
       maskClosable={false}
@@ -190,7 +213,7 @@ function AddCauHoiModal({ visible, onCancel, idKhoCauHoi, onCreated }: Props) {
       <Form
         layout="vertical"
         ref={formRef}
-        onFinish={taoCauHoi}
+        onFinish={capNhatCauHoi}
         onFieldsChange={(form) => {
           if (form[0]?.name?.toString() !== 'nhieuDapAn') return;
           const nhieuDapAn = form[0]?.value;
@@ -284,4 +307,4 @@ function AddCauHoiModal({ visible, onCancel, idKhoCauHoi, onCreated }: Props) {
   );
 }
 
-export default AddCauHoiModal;
+export default UpdateCauHoiModal;

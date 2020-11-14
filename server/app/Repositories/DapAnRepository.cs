@@ -19,6 +19,8 @@ namespace Server.Repository
     {
       var dsDapAn = new List<DapAn>();
 
+      if (dsId == null) return dsDapAn;
+
       foreach (var id in dsId)
       {
         var dapAn = await _context.DapAnContext.FindAsync(id);
