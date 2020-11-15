@@ -13,6 +13,7 @@ import PageLopHoc from '../pages/LopHoc/PageLopHoc';
 import PageSinhVien from '../pages/SinhVien/PageSinhVien';
 import PageKhoCauHoi from '../pages/KhoCauHoi/PageKhoCauHoi';
 import PageCauHoi from '../pages/CauHoi/PageCauHoi';
+import PageDeThi from '../pages/DeThi/PageDeThi';
 
 function RedirectRoute() {
   return <Redirect to={routes.TAI_KHOAN} />;
@@ -64,6 +65,11 @@ export default function AppRoutes() {
             exact
             path={routes.HOC_PHAN + '/:idHocPhan/kho-cau-hoi'}
             component={PageKhoCauHoi}
+          />
+          <Route
+            exact
+            path={routes.HOC_PHAN + '/:idHocPhan/de-thi'}
+            component={PageDeThi}
           />
           <Route
             exact

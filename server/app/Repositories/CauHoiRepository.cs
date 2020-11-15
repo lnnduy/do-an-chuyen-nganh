@@ -30,6 +30,22 @@ namespace Server.Repository
       return cauHoi;
     }
 
+    public async Task<List<CauHoi>> GetMultipleCauHoiById(List<long> dsId)
+    {
+      var dsCauHoi = new List<CauHoi>();
+
+      foreach (var id in dsId)
+      {
+        var cauHoi = await GetCauHoiById(id);
+        cauHoi.DsDapAn = _dapAnRepository.GetAll(cauHoi.Id);
+
+        if (cauHoi != null)
+          dsCauHoi.Add(cauHoi);
+      }
+
+      return dsCauHoi;
+    }
+
     public async Task<CauHoi> CreateCauHoi(CauHoi cauHoi, List<DapAn> dsDapAn)
     {
       await _context.CauHoiContext.AddAsync(cauHoi);
