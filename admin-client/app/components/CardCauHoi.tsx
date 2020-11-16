@@ -6,14 +6,34 @@ import {
   CloseCircleOutlined,
 } from '@ant-design/icons';
 import UpdateCauHoiModal from '../pages/CauHoi/UpdateCauHoiModal';
+import handleErrors from '../shared/handleErrors';
+import api from '../api';
 
 type Props = {
   cauHoi: any;
   onUpdated: Function;
+  onDeleted: Function;
 };
 
-function CardCauHoi({ cauHoi, onUpdated }: Props) {
+function CardCauHoi({ cauHoi, onUpdated, onDeleted }: Props) {
   const [showUpdateCauHoi, setShowUpdateCauHoi] = useState(false);
+
+  const deleteCauHoi = async () => {
+    try {
+      const res = await api.cauHoi.xoaCauHoi(cauHoi.id);
+
+      if (!res.success) {
+        handleErrors(res);
+        console.log(res.errors);
+        return;
+      }
+
+      onDeleted(cauHoi);
+    } catch (error) {
+      handleErrors(error);
+      console.log(error);
+    }
+  };
 
   return (
     <Card
@@ -27,6 +47,7 @@ function CardCauHoi({ cauHoi, onUpdated }: Props) {
           cancelText="Huỷ"
           okText="Xoá"
           icon={<CloseCircleOutlined style={{ color: 'red' }} />}
+          onConfirm={deleteCauHoi}
         >
           <Tooltip title="Xoá câu hỏi">
             <DeleteOutlined />

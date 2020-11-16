@@ -28,9 +28,11 @@ function Actions({ idHocPhan, onUpdated, onDeleted, khoCauHoi }: Props) {
 
       if (!res.success) {
         handleErrors(res);
-      } else {
-        onDeleted(khoCauHoi);
+        console.log(res.errors);
+        return;
       }
+
+      onDeleted(khoCauHoi);
     } catch (error) {
       console.log(error);
     }

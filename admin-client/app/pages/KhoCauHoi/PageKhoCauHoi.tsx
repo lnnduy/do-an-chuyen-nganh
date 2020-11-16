@@ -96,11 +96,11 @@ function PageKhoCauHoi({ match }: Props) {
 
   const onDeleted = (khoCauHoi: any) => {
     const khoCauHoiIndex = dsKhoCauHoi.findIndex(
-      (tk) => tk.id === khoCauHoi.id
+      (kch) => kch.id === khoCauHoi.id
     );
-    const dsSV = [...dsKhoCauHoi];
-    dsSV.splice(khoCauHoiIndex, 1);
-    setDsKhoCauHoi(dsSV);
+    const dsKCH = [...dsKhoCauHoi];
+    dsKCH.splice(khoCauHoiIndex, 1);
+    setDsKhoCauHoi([...dsKCH]);
     notification['success']({
       message: 'Thành công',
       description: `Xoá kho câu hỏi ${khoCauHoi.tenKhoCauHoi} thành công`,

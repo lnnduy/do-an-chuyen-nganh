@@ -80,8 +80,9 @@ namespace Server.Repository
     public async Task DeleteCauHoi(CauHoi cauHoi)
     {
       await _dapAnRepository.DeleteMultipleDapAn(cauHoi.DsDapAn);
-      _context.Entry(cauHoi).State = EntityState.Deleted;
+      cauHoi.DsDapAn = null;
       _context.CauHoiContext.Remove(cauHoi);
+      _context.Entry(cauHoi).State = EntityState.Deleted;
       await _context.SaveChangesAsync();
     }
   }

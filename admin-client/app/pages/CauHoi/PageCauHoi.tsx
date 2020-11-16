@@ -93,6 +93,18 @@ function PageCauHoi({ match }: Props) {
     });
   };
 
+  const onDeleted = (cauHoi: any) => {
+    const cauHoiIndex = dsCauHoi.findIndex((ch: any) => ch.id === cauHoi.id);
+    setDsCauHoi([
+      ...dsCauHoi.slice(0, cauHoiIndex),
+      ...dsCauHoi.slice(cauHoiIndex + 1),
+    ]);
+    notification.success({
+      message: 'Thành công',
+      description: `Xoá câu hỏi ${cauHoi.noiDung} thành công`,
+    });
+  };
+
   useEffect(() => {
     loadKhoCauHoi();
   }, [loadKhoCauHoi]);
@@ -167,7 +179,11 @@ function PageCauHoi({ match }: Props) {
         <Row gutter={[10, 10]}>
           {dsCauHoi.map((cauHoi: any) => (
             <Col key={cauHoi.id} span={8}>
-              <CardCauHoi cauHoi={cauHoi} onUpdated={onUpdated} />
+              <CardCauHoi
+                cauHoi={cauHoi}
+                onUpdated={onUpdated}
+                onDeleted={onDeleted}
+              />
             </Col>
           ))}
         </Row>
