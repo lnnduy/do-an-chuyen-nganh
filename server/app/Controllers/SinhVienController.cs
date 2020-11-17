@@ -9,7 +9,7 @@ namespace Server.Controller
 {
   [Authorize]
   [ApiController]
-  [Route("api/lop-hoc")]
+  [Route("api/lop-hoc/{idLopHoc}/sinh-vien")]
   public partial class SinhVienController : ControllerBase
   {
     private readonly ISinhVienService _sinhVienService;
@@ -19,7 +19,7 @@ namespace Server.Controller
       _sinhVienService = sinhVienService;
     }
 
-    [HttpGet("{idLopHoc}/sinh-vien")]
+    [HttpGet("")]
     public IActionResult GetDanhSachLop(long idLopHoc)
     {
       var claim = User.Claims.FirstOrDefault(c => c.Type == "id");
@@ -32,7 +32,7 @@ namespace Server.Controller
       return Ok(serviceResult);
     }
 
-    [HttpPost("{idLopHoc}/sinh-vien")]
+    [HttpPost("")]
     public async Task<IActionResult> ThemSinhVienVaoLop(long idLopHoc, TaoSinhVienRequest request)
     {
       var claim = User.Claims.FirstOrDefault(c => c.Type == "id");

@@ -5,7 +5,6 @@ import PageTaiKhoan from '../pages/TaiKhoan/PageTaiKhoan';
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import api from '../api';
-import handleErrors from '../shared/handleErrors';
 import { ReduxStore } from '../store';
 import actions from '../store/actions';
 import { AuthState } from '../store/auth/reducer';
@@ -13,6 +12,8 @@ import PageHocPhan from '../pages/HocPhan/PageHocPhan';
 import PageLopHoc from '../pages/LopHoc/PageLopHoc';
 import PageSinhVien from '../pages/SinhVien/PageSinhVien';
 import PageKhoCauHoi from '../pages/KhoCauHoi/PageKhoCauHoi';
+import PageCauHoi from '../pages/CauHoi/PageCauHoi';
+import PageDeThi from '../pages/DeThi/PageDeThi';
 
 function RedirectRoute() {
   return <Redirect to={routes.TAI_KHOAN} />;
@@ -38,7 +39,7 @@ export default function AppRoutes() {
         dispatch(actions.auth.setUser(res.data));
       }
     } catch (error) {
-      handleErrors(error);
+      console.log(error);
     }
 
     setTriedLogin(true);
@@ -64,6 +65,18 @@ export default function AppRoutes() {
             exact
             path={routes.HOC_PHAN + '/:idHocPhan/kho-cau-hoi'}
             component={PageKhoCauHoi}
+          />
+          <Route
+            exact
+            path={routes.HOC_PHAN + '/:idHocPhan/de-thi'}
+            component={PageDeThi}
+          />
+          <Route
+            exact
+            path={
+              routes.HOC_PHAN + '/:idHocPhan/kho-cau-hoi/:idKhoCauHoi/cau-hoi'
+            }
+            component={PageCauHoi}
           />
           <Route exact path="/" component={RedirectRoute} />
         </Switch>

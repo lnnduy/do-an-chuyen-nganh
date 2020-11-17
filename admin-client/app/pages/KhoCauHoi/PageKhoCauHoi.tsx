@@ -7,6 +7,7 @@ import {
   Button,
   Table,
   notification,
+  Typography,
 } from 'antd';
 import {
   ReloadOutlined,
@@ -33,6 +34,7 @@ function PageKhoCauHoi({ match }: Props) {
   const [showAddKhoCauHoi, setShowAddKhoCauHoi] = useState(false);
   const [loading, setLoading] = useState(false);
   const [dsKhoCauHoi, setDsKhoCauHoi] = useState(new Array<any>());
+  const [hocPhan, setHocPhan] = useState<any>(null);
 
   const loadDsKhoCauHoi = useCallback(async () => {
     setLoading(true);
@@ -49,10 +51,25 @@ function PageKhoCauHoi({ match }: Props) {
       setDsKhoCauHoi(dsKhoCauHoi);
     } catch (error) {
       console.log(error);
-      handleErrors(error);
     }
 
     setLoading(false);
+  }, []);
+
+  const loadHocPhan = useCallback(async () => {
+    try {
+      const res = await api.hocPhan.getHocPhan(match.params.idHocPhan);
+
+      if (!res.success) {
+        handleErrors(res);
+        return;
+      }
+
+      const hocPhan = res.data;
+      setHocPhan(hocPhan);
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const onCreated = (khoCauHoi: any) => {
@@ -79,11 +96,11 @@ function PageKhoCauHoi({ match }: Props) {
 
   const onDeleted = (khoCauHoi: any) => {
     const khoCauHoiIndex = dsKhoCauHoi.findIndex(
-      (tk) => tk.id === khoCauHoi.id
+      (kch) => kch.id === khoCauHoi.id
     );
-    const dsSV = [...dsKhoCauHoi];
-    dsSV.splice(khoCauHoiIndex, 1);
-    setDsKhoCauHoi(dsSV);
+    const dsKCH = [...dsKhoCauHoi];
+    dsKCH.splice(khoCauHoiIndex, 1);
+    setDsKhoCauHoi([...dsKCH]);
     notification['success']({
       message: 'Thành công',
       description: `Xoá kho câu hỏi ${khoCauHoi.tenKhoCauHoi} thành công`,
@@ -95,11 +112,15 @@ function PageKhoCauHoi({ match }: Props) {
   }, [loadDsKhoCauHoi]);
 
   useEffect(() => {
+    loadHocPhan();
+  }, [loadHocPhan]);
+
+  useEffect(() => {
     dispatch(actions.app.updateTitle('Quản lý kho câu hỏi'));
   }, []);
 
   return (
-    <Space direction="vertical" style={{ width: '100%' }}>
+    <Space direction="vertical" style={{ width: '100%' }} size="large">
       <Row>
         <Button
           type="link"
@@ -108,6 +129,13 @@ function PageKhoCauHoi({ match }: Props) {
         >
           Quay lại
         </Button>
+      </Row>
+      <Row>
+        {!!hocPhan && (
+          <Typography.Title level={3}>
+            Học phần: {hocPhan.tenHocPhan}
+          </Typography.Title>
+        )}
       </Row>
       <Row justify="space-between">
         <Col span={12}>

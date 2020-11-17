@@ -32,7 +32,6 @@ function Actions({ lopHoc, onUpdated, onDeleted }: Props) {
       }
     } catch (error) {
       console.log(error);
-      handleErrors(error);
     }
   };
 

@@ -18,6 +18,96 @@ namespace server.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Server.Entity.CauHoi", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DoKho")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("IdKhoCauHoi")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("NhieuDapAn")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NoiDung")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdKhoCauHoi");
+
+                    b.ToTable("CauHoi");
+                });
+
+            modelBuilder.Entity("Server.Entity.ChiTietDeThi", b =>
+                {
+                    b.Property<long>("IdDeThi")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IdCauHoi")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("IdDeThi", "IdCauHoi");
+
+                    b.HasIndex("IdCauHoi");
+
+                    b.ToTable("ChiTietDeThi");
+                });
+
+            modelBuilder.Entity("Server.Entity.DapAn", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("DapAnDung")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("IdCauHoi")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("NoiDung")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdCauHoi");
+
+                    b.ToTable("DapAn");
+                });
+
+            modelBuilder.Entity("Server.Entity.DeThi", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("DeThiThu")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("IdHocPhan")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("SanSang")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TenDeThi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdHocPhan");
+
+                    b.ToTable("DeThi");
+                });
+
             modelBuilder.Entity("Server.Entity.HocPhan", b =>
                 {
                     b.Property<long>("Id")
@@ -137,6 +227,53 @@ namespace server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TaiKhoan");
+                });
+
+            modelBuilder.Entity("Server.Entity.CauHoi", b =>
+                {
+                    b.HasOne("Server.Entity.KhoCauHoi", "KhoCauHoi")
+                        .WithMany("DsCauHoi")
+                        .HasForeignKey("IdKhoCauHoi")
+                        .HasConstraintName("FK_KhoCauHoi_CauHoi")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Server.Entity.ChiTietDeThi", b =>
+                {
+                    b.HasOne("Server.Entity.CauHoi", "CauHoi")
+                        .WithMany("DsDeThi")
+                        .HasForeignKey("IdCauHoi")
+                        .HasConstraintName("FK_CauHoi_ChiTietDeThi")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Server.Entity.DeThi", "DeThi")
+                        .WithMany("DsCauHoi")
+                        .HasForeignKey("IdDeThi")
+                        .HasConstraintName("FK_DeThi_ChiTietDeThi")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Server.Entity.DapAn", b =>
+                {
+                    b.HasOne("Server.Entity.CauHoi", "CauHoi")
+                        .WithMany("DsDapAn")
+                        .HasForeignKey("IdCauHoi")
+                        .HasConstraintName("FK_CauHoi_DapAn")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Server.Entity.DeThi", b =>
+                {
+                    b.HasOne("Server.Entity.HocPhan", "HocPhan")
+                        .WithMany("DsDeThi")
+                        .HasForeignKey("IdHocPhan")
+                        .HasConstraintName("FK_HocPhan_DeThi")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Server.Entity.KhoCauHoi", b =>

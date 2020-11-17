@@ -1,3 +1,4 @@
+import handleErrors from '../shared/handleErrors';
 import axiosInstance from './axiosInstance';
 
 const api = axiosInstance('tai-khoan');
@@ -9,7 +10,7 @@ async function getDsTaiKhoan(): Promise<any> {
     res = data;
     return data;
   } catch (error) {
-    console.log(error);
+    handleErrors(error);
     return res;
   }
 }
@@ -21,7 +22,7 @@ async function taoTaiKhoan(taiKhoan: any): Promise<any> {
     res = data;
     return data;
   } catch (error) {
-    console.log(error);
+    handleErrors(error);
     return res;
   }
 }
@@ -33,7 +34,7 @@ async function capNhatTaiKhoan(id: number, taiKhoan: any): Promise<any> {
     res = data;
     return data;
   } catch (error) {
-    console.log(error);
+    handleErrors(error);
     return res;
   }
 }
@@ -45,7 +46,7 @@ async function xoaTaiKhoan(id: number): Promise<any> {
     res = data;
     return data;
   } catch (error) {
-    console.log(error);
+    handleErrors(error);
     return res;
   }
 }

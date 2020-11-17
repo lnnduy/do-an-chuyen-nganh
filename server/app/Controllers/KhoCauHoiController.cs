@@ -10,11 +10,11 @@ namespace Server.Controller
   [Authorize]
   [ApiController]
   [Route("api/hoc-phan/{idHocPhan}/kho-cau-hoi")]
-  public partial class KhoCauHoiController : ControllerBase
+  public class HocPhanKhoCauHoiController : ControllerBase
   {
     private readonly IKhoCauHoiService _khoCauHoiService;
 
-    public KhoCauHoiController(IKhoCauHoiService khoCauHoiService)
+    public HocPhanKhoCauHoiController(IKhoCauHoiService khoCauHoiService)
     {
       _khoCauHoiService = khoCauHoiService;
     }
@@ -47,8 +47,28 @@ namespace Server.Controller
   }
 
   [Route("api/kho-cau-hoi/{id}")]
-  public partial class KhoCauHoiController : ControllerBase
+  public class KhoCauHoiController : ControllerBase
   {
+    private readonly IKhoCauHoiService _khoCauHoiService;
+
+    public KhoCauHoiController(IKhoCauHoiService khoCauHoiService)
+    {
+      _khoCauHoiService = khoCauHoiService;
+    }
+
+    [HttpGet("")]
+    public async Task<IActionResult> GetKhoCauHoi(long id)
+    {
+      var claim = User.Claims.FirstOrDefault(c => c.Type == "id");
+
+      if (!User.Identity.IsAuthenticated || claim == null)
+        return Unauthorized();
+
+      var serviceResult = await _khoCauHoiService.GetKhoCauHoi(id);
+
+      return Ok(serviceResult);
+    }
+
     [HttpPut("")]
     public async Task<IActionResult> CapNhatKhoCauHoi(long id, TaoKhoCauHoiRequest request)
     {

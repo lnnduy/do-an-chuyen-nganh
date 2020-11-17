@@ -35,7 +35,6 @@ function AddTaiKhoanModal({ visible, onCancel, onCreated }: Props) {
 
       onCreated(res.data);
     } catch (error) {
-      handleErrors(error);
       console.log(error);
       setFailed(true);
     }

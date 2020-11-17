@@ -5,6 +5,7 @@ import {
   QuestionCircleOutlined,
   EditOutlined,
   FileUnknownOutlined,
+  FileTextOutlined,
 } from '@ant-design/icons';
 import UpdateHocPhanModal from './UpdateHocPhanModal';
 import handleErrors from '../../shared/handleErrors';
@@ -33,13 +34,21 @@ function Actions({ hocPhan, onUpdated, onDeleted }: Props) {
       }
     } catch (error) {
       console.log(error);
-      handleErrors(error);
     }
   };
 
   return (
     <>
       <Space>
+        <Tooltip title="Quản lý đề thi">
+          <Button
+            type="text"
+            icon={<FileTextOutlined />}
+            onClick={() =>
+              history.push(`${ROUTES.HOC_PHAN}/${hocPhan.id}/de-thi`)
+            }
+          />
+        </Tooltip>
         <Tooltip title="Quản lý kho câu hỏi">
           <Button
             type="text"

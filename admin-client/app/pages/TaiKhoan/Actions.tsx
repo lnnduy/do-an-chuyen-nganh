@@ -29,7 +29,6 @@ function Actions({ taiKhoan, onUpdated, onDeleted }: Props) {
       }
     } catch (error) {
       console.log(error);
-      handleErrors(error);
     }
   };
 

@@ -4,6 +4,12 @@
 @import './styles/LayoutSidebar.css';
 @import './styles/LayoutHeader.css';
 @import './styles/LayoutMain.css';
+@import './styles/CardCauHoi.css';
+@import './styles/AddCauHoiModal.css';
+
+* {
+  user-select: none;
+}
 
 body {
   position: relative;
@@ -40,7 +46,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -53,4 +59,12 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #72a3d4;
+}
+
+.ant-typography > pre {
+  font-family: unset;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
 }

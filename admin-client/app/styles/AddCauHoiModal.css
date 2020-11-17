@@ -1,0 +1,12 @@
+.add-dap-an-card > .ant-card-body {
+  border-width: 3px;
+  border-style: dashed;
+  border-color: #478f80;
+  background-color: #4ec9b010;
+}
+
+.add-dap-an-card:hover > .ant-card-body {
+  border-color: #4ec9b0;
+  cursor: pointer;
+  background-color: #4ec9b020;
+}

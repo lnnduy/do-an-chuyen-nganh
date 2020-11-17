@@ -50,7 +50,6 @@ function UpdateSinhVienModal({
         }
       } else onUpdated(res.data);
     } catch (error) {
-      handleErrors(error);
       console.log(error);
       setFailed(true);
     } finally {

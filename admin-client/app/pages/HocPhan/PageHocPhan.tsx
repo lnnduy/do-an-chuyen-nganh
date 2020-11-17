@@ -38,7 +38,6 @@ function PageHocPhan() {
       setDsHocPhan(dsHocPhan);
     } catch (error) {
       console.log(error);
-      handleErrors(error);
     }
 
     setLoading(false);
@@ -84,7 +83,7 @@ function PageHocPhan() {
   }, []);
 
   return (
-    <Space direction="vertical" style={{ width: '100%' }}>
+    <Space direction="vertical" style={{ width: '100%' }} size="large">
       <Row justify="space-between">
         <Col span={12}>
           <Input.Search size="large" placeholder="Tìm kiếm học phần" />

@@ -32,6 +32,19 @@ namespace Server.Controller
       return Ok(serviceResult);
     }
 
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetHocPhan(long id)
+    {
+      var claim = User.Claims.FirstOrDefault(c => c.Type == "id");
+
+      if (!User.Identity.IsAuthenticated || claim == null)
+        return Unauthorized();
+
+      var serviceResult = await _hocPhanService.GetHocPhan(id);
+
+      return Ok(serviceResult);
+    }
+
     [HttpPost("")]
     public async Task<IActionResult> TaoHocPhan(TaoHocPhanRequest request)
     {

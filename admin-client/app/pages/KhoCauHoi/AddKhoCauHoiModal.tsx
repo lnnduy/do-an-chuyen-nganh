@@ -35,7 +35,6 @@ function AddKhoCauHoiModal({ visible, onCancel, onCreated, idHocPhan }: Props) {
 
       onCreated(res.data);
     } catch (error) {
-      handleErrors(error);
       console.log(error);
       setFailed(true);
     }
@@ -43,9 +42,9 @@ function AddKhoCauHoiModal({ visible, onCancel, onCreated, idHocPhan }: Props) {
 
   return (
     <Modal
-      title="Tạo kho cẩu hỏi"
+      title="Tạo kho câu hỏi"
       visible={visible}
-      okText="Tạo kho cẩu hỏi"
+      okText="Tạo kho câu hỏi"
       cancelText="Huỷ"
       centered
       maskClosable={false}
