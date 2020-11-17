@@ -7,6 +7,7 @@ namespace Server.Model.Response
   public class DeThiResponse
   {
     public long Id { get; set; }
+    public long IdHocPhan { get; set; }
     public string TenDeThi { get; set; }
     public bool DeThiThu { get; set; }
     public bool SanSang { get; set; }
@@ -18,6 +19,7 @@ namespace Server.Model.Response
     public DeThiResponse(DeThi deThi, List<CauHoi> dsCauHoi)
     {
       Id = deThi.Id;
+      IdHocPhan = deThi.IdHocPhan;
       TenDeThi = deThi.TenDeThi;
       DeThiThu = deThi.DeThiThu;
       SanSang = deThi.SanSang;

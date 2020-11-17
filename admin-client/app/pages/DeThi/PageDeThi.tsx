@@ -1,16 +1,28 @@
-import React, { useCallback, useEffect, useState } from 'react';
 import {
-  ArrowLeftOutlined,
+  Space,
+  Row,
+  Col,
+  Input,
+  Tooltip,
+  Button,
+  Table,
+  notification,
+  Typography,
+} from 'antd';
+import {
   ReloadOutlined,
   UserAddOutlined,
+  ArrowLeftOutlined,
 } from '@ant-design/icons';
-import { Space, Row, Button, Typography, Col, Input, Tooltip } from 'antd';
+import React, { useCallback, useEffect, useState } from 'react';
+import columns from './columns';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
-import ROUTES from '../../constants/routes';
 import api from '../../api';
 import handleErrors from '../../shared/handleErrors';
 import actions from '../../store/actions';
+import AddDeThiModal from './AddDeThiModal';
+import ROUTES from '../../constants/routes';
+import { useHistory } from 'react-router';
 
 type Props = {
   match: any;
@@ -19,8 +31,30 @@ type Props = {
 function PageDeThi({ match }: Props) {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [showAddDeThi, setShowAddDeThi] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [dsDeThi, setDsDeThi] = useState(new Array<any>());
   const [hocPhan, setHocPhan] = useState<any>(null);
-  const [showAddDeThi, setShowAddDeThi] = useState<boolean>(false);
+
+  const loadDsDeThi = useCallback(async () => {
+    setLoading(true);
+
+    try {
+      const res = await api.deThi.getDsDeThi(match.params.idHocPhan);
+
+      if (!res.success) {
+        handleErrors(res);
+        return;
+      }
+
+      const dsDeThi = res.data;
+      setDsDeThi(dsDeThi);
+    } catch (error) {
+      console.log(error);
+    }
+
+    setLoading(false);
+  }, []);
 
   const loadHocPhan = useCallback(async () => {
     try {
@@ -38,7 +72,40 @@ function PageDeThi({ match }: Props) {
     }
   }, []);
 
-  const loadDsDeThi = () => {};
+  const onCreated = (deThi: any) => {
+    setDsDeThi([deThi, ...dsDeThi]);
+    setShowAddDeThi(false);
+    notification['success']({
+      message: 'Thành công',
+      description: `Tạo đề thi ${deThi.tenDeThi} thành công`,
+    });
+  };
+
+  const onUpdated = (deThi: any) => {
+    const deThiIndex = dsDeThi.findIndex((tk) => tk.id === deThi.id);
+    const dsSV = [...dsDeThi];
+    dsSV.splice(deThiIndex, 1, deThi);
+    setDsDeThi(dsSV);
+    notification['success']({
+      message: 'Thành công',
+      description: `Cập nhật thông tin đề thi ${deThi.tenDeThi} thành công`,
+    });
+  };
+
+  const onDeleted = (deThi: any) => {
+    const deThiIndex = dsDeThi.findIndex((tk) => tk.id === deThi.id);
+    const dsSV = [...dsDeThi];
+    dsSV.splice(deThiIndex, 1);
+    setDsDeThi(dsSV);
+    notification['success']({
+      message: 'Thành công',
+      description: `Xoá đề thi ${deThi.tenDeThi} thành công`,
+    });
+  };
+
+  useEffect(() => {
+    loadDsDeThi();
+  }, [loadDsDeThi]);
 
   useEffect(() => {
     loadHocPhan();
@@ -49,7 +116,7 @@ function PageDeThi({ match }: Props) {
   }, []);
 
   return (
-    <Space direction="vertical" size="large" style={{ width: '100%' }}>
+    <Space direction="vertical" style={{ width: '100%' }} size="large">
       <Row>
         <Button
           type="link"
@@ -93,6 +160,20 @@ function PageDeThi({ match }: Props) {
           </Row>
         </Col>
       </Row>
+      <Table
+        columns={columns(onUpdated, onDeleted)}
+        dataSource={dsDeThi}
+        loading={loading}
+        bordered
+      />
+      {showAddDeThi && (
+        <AddDeThiModal
+          idHocPhan={match.params.idHocPhan}
+          visible={showAddDeThi}
+          onCancel={setShowAddDeThi}
+          onCreated={onCreated}
+        />
+      )}
     </Space>
   );
 }

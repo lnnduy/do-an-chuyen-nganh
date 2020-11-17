@@ -11,11 +11,17 @@ import api from '../api';
 
 type Props = {
   cauHoi: any;
-  onUpdated: Function;
-  onDeleted: Function;
+  onUpdated?: Function;
+  onDeleted?: Function;
+  actions?: boolean;
 };
 
-function CardCauHoi({ cauHoi, onUpdated, onDeleted }: Props) {
+function CardCauHoi({
+  cauHoi,
+  onUpdated = () => {},
+  onDeleted = () => {},
+  actions = true,
+}: Props) {
   const [showUpdateCauHoi, setShowUpdateCauHoi] = useState(false);
 
   const deleteCauHoi = async () => {
@@ -38,22 +44,25 @@ function CardCauHoi({ cauHoi, onUpdated, onDeleted }: Props) {
   return (
     <Card
       className="card-cau-hoi"
-      actions={[
-        <Tooltip title="Cập nhật câu hỏi">
-          <EditOutlined onClick={() => setShowUpdateCauHoi(true)} />
-        </Tooltip>,
-        <Popconfirm
-          title="Xoá câu hỏi"
-          cancelText="Huỷ"
-          okText="Xoá"
-          icon={<CloseCircleOutlined style={{ color: 'red' }} />}
-          onConfirm={deleteCauHoi}
-        >
-          <Tooltip title="Xoá câu hỏi">
-            <DeleteOutlined />
-          </Tooltip>
-        </Popconfirm>,
-      ]}
+      actions={
+        (actions && [
+          <Tooltip title="Cập nhật câu hỏi">
+            <EditOutlined onClick={() => setShowUpdateCauHoi(true)} />
+          </Tooltip>,
+          <Popconfirm
+            title="Xoá câu hỏi"
+            cancelText="Huỷ"
+            okText="Xoá"
+            icon={<CloseCircleOutlined style={{ color: 'red' }} />}
+            onConfirm={deleteCauHoi}
+          >
+            <Tooltip title="Xoá câu hỏi">
+              <DeleteOutlined />
+            </Tooltip>
+          </Popconfirm>,
+        ]) ||
+        []
+      }
     >
       <Typography.Title level={4}>
         <pre>{cauHoi.noiDung}</pre>
