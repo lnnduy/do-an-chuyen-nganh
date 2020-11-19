@@ -77,6 +77,7 @@ function UpdateKhoCauHoiModal({
 
   return (
     <Modal
+      style={{ paddingTop: 40 }}
       title={`Cập nhật kho câu hỏi ${khoCauHoi.tenKhoCauHoi}`}
       visible={visible}
       okText="Cập nhật"

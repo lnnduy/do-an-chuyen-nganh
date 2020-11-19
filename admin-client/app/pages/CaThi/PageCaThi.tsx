@@ -20,7 +20,7 @@ import { useDispatch } from 'react-redux';
 import api from '../../api';
 import handleErrors from '../../shared/handleErrors';
 import actions from '../../store/actions';
-import AddSinhVienModal from './AddSinhVienModal';
+import AddCaThiModal from './AddCaThiModal';
 import ROUTES from '../../constants/routes';
 import { useHistory } from 'react-router';
 
@@ -28,27 +28,27 @@ type Props = {
   match: any;
 };
 
-function PageSinhVien({ match }: Props) {
+function PageCaThi({ match }: Props) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [showAddSinhVien, setShowAddSinhVien] = useState(false);
+  const [showAddCaThi, setShowAddCaThi] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [dsSinhVien, setDsSinhVien] = useState(new Array<any>());
-  const [lopHoc, setLopHoc] = useState<any>(null);
+  const [dsCaThi, setDsCaThi] = useState(new Array<any>());
+  const [hocPhan, setHocPhan] = useState<any>(null);
 
-  const loadDsSinhVien = useCallback(async () => {
+  const loadDsCaThi = useCallback(async () => {
     setLoading(true);
 
     try {
-      const res = await api.sinhVien.getDanhSachLop(match.params.idLopHoc);
+      const res = await api.caThi.getDsCaThi(match.params.idHocPhan);
 
       if (!res.success) {
         handleErrors(res);
         return;
       }
 
-      const dsSinhVien = res.data;
-      setDsSinhVien(dsSinhVien);
+      const dsCaThi = res.data;
+      setDsCaThi(dsCaThi);
     } catch (error) {
       console.log(error);
     }
@@ -56,63 +56,63 @@ function PageSinhVien({ match }: Props) {
     setLoading(false);
   }, []);
 
-  const loadLopHoc = useCallback(async () => {
+  const loadHocPhan = useCallback(async () => {
     try {
-      const res = await api.lopHoc.getLopHoc(match.params.idLopHoc);
+      const res = await api.hocPhan.getHocPhan(match.params.idHocPhan);
 
       if (!res.success) {
         handleErrors(res);
         return;
       }
 
-      const lopHoc = res.data;
-      setLopHoc(lopHoc);
+      const hocPhan = res.data;
+      setHocPhan(hocPhan);
     } catch (error) {
       console.log(error);
     }
   }, []);
 
-  const onCreated = (sinhVien: any) => {
-    setDsSinhVien([sinhVien, ...dsSinhVien]);
-    setShowAddSinhVien(false);
+  const onCreated = (caThi: any) => {
+    setDsCaThi([caThi, ...dsCaThi]);
+    setShowAddCaThi(false);
     notification['success']({
       message: 'Thành công',
-      description: `Tạo sinh viên ${sinhVien.hoTen} thành công`,
+      description: `Tạo ca thi ${caThi.tenCaThi} thành công`,
     });
   };
 
-  const onUpdated = (sinhVien: any) => {
-    const sinhVienIndex = dsSinhVien.findIndex((tk) => tk.id === sinhVien.id);
-    const dsSV = [...dsSinhVien];
-    dsSV.splice(sinhVienIndex, 1, sinhVien);
-    setDsSinhVien(dsSV);
+  const onUpdated = (caThi: any) => {
+    const caThiIndex = dsCaThi.findIndex((tk) => tk.id === caThi.id);
+    const dsSV = [...dsCaThi];
+    dsSV.splice(caThiIndex, 1, caThi);
+    setDsCaThi(dsSV);
     notification['success']({
       message: 'Thành công',
-      description: `Cập nhật thông tin sinh viên ${sinhVien.hoTen} thành công`,
+      description: `Cập nhật thông tin ca thi ${caThi.tenCaThi} thành công`,
     });
   };
 
-  const onDeleted = (sinhVien: any) => {
-    const sinhVienIndex = dsSinhVien.findIndex((tk) => tk.id === sinhVien.id);
-    const dsSV = [...dsSinhVien];
-    dsSV.splice(sinhVienIndex, 1);
-    setDsSinhVien(dsSV);
+  const onDeleted = (caThi: any) => {
+    const caThiIndex = dsCaThi.findIndex((tk) => tk.id === caThi.id);
+    const dsSV = [...dsCaThi];
+    dsSV.splice(caThiIndex, 1);
+    setDsCaThi(dsSV);
     notification['success']({
       message: 'Thành công',
-      description: `Xoá sinh viên ${sinhVien.hoTen} thành công`,
+      description: `Xoá ca thi ${caThi.tenCaThi} thành công`,
     });
   };
 
   useEffect(() => {
-    loadDsSinhVien();
-  }, [loadDsSinhVien]);
+    loadDsCaThi();
+  }, [loadDsCaThi]);
 
   useEffect(() => {
-    loadLopHoc();
-  }, [loadLopHoc]);
+    loadHocPhan();
+  }, [loadHocPhan]);
 
   useEffect(() => {
-    dispatch(actions.app.updateTitle('Quản lý sinh viên'));
+    dispatch(actions.app.updateTitle('Quản lý ca thi'));
   }, []);
 
   return (
@@ -121,19 +121,21 @@ function PageSinhVien({ match }: Props) {
         <Button
           type="link"
           icon={<ArrowLeftOutlined />}
-          onClick={() => history.push(ROUTES.LOP_HOC)}
+          onClick={() => history.push(ROUTES.HOC_PHAN)}
         >
           Quay lại
         </Button>
       </Row>
       <Row>
-        {!!lopHoc && (
-          <Typography.Title level={3}>Lớp: {lopHoc.tenLop}</Typography.Title>
+        {!!hocPhan && (
+          <Typography.Title level={3}>
+            Học phần: {hocPhan.tenHocPhan}
+          </Typography.Title>
         )}
       </Row>
       <Row justify="space-between">
         <Col span={12}>
-          <Input.Search size="large" placeholder="Tìm kiếm sinh viên" />
+          <Input.Search size="large" placeholder="Tìm kiếm ca thi" />
         </Col>
         <Col span={12}>
           <Row justify="end">
@@ -143,16 +145,16 @@ function PageSinhVien({ match }: Props) {
                   type="ghost"
                   icon={<ReloadOutlined />}
                   size="large"
-                  onClick={() => loadDsSinhVien()}
+                  onClick={() => loadDsCaThi()}
                 />
               </Tooltip>
               <Button
                 type="primary"
                 icon={<PlusOutlined />}
                 size="large"
-                onClick={() => setShowAddSinhVien(true)}
+                onClick={() => setShowAddCaThi(true)}
               >
-                Thêm sinh viên
+                Thêm ca thi
               </Button>
             </Space>
           </Row>
@@ -160,15 +162,15 @@ function PageSinhVien({ match }: Props) {
       </Row>
       <Table
         columns={columns(onUpdated, onDeleted)}
-        dataSource={dsSinhVien}
+        dataSource={dsCaThi}
         loading={loading}
         bordered
       />
-      {showAddSinhVien && (
-        <AddSinhVienModal
-          idLopHoc={match.params.idLopHoc}
-          visible={showAddSinhVien}
-          onCancel={setShowAddSinhVien}
+      {showAddCaThi && (
+        <AddCaThiModal
+          idHocPhan={match.params.idHocPhan}
+          visible={showAddCaThi}
+          onCancel={setShowAddCaThi}
           onCreated={onCreated}
         />
       )}
@@ -176,4 +178,4 @@ function PageSinhVien({ match }: Props) {
   );
 }
 
-export default PageSinhVien;
+export default PageCaThi;

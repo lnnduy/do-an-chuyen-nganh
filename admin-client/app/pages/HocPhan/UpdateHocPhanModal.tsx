@@ -64,6 +64,7 @@ function UpdateHocPhanModal({ visible, onCancel, onUpdated, hocPhan }: Props) {
 
   return (
     <Modal
+      style={{ paddingTop: 40 }}
       title={`Cập nhật học phần ${hocPhan.tenHocPhan}`}
       visible={visible}
       okText="Cập nhật"

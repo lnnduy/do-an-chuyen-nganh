@@ -238,6 +238,7 @@ function UpdateDeThiModal({
 
   return (
     <Modal
+      style={{ paddingTop: 40 }}
       title="Cập nhật đề thi"
       visible={visible}
       okText="Cập nhật"

@@ -41,6 +41,7 @@ function AddHocPhanModal({ visible, onCancel, onCreated }: Props) {
 
   return (
     <Modal
+      style={{ paddingTop: 40 }}
       title="Tạo học phần"
       visible={visible}
       okText="Tạo học phần"

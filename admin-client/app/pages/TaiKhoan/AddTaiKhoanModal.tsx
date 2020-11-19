@@ -42,6 +42,7 @@ function AddTaiKhoanModal({ visible, onCancel, onCreated }: Props) {
 
   return (
     <Modal
+      style={{ paddingTop: 40 }}
       title="Tạo tài khoản"
       visible={visible}
       okText="Tạo tài khoản"

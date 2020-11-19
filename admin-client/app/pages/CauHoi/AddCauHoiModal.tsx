@@ -177,6 +177,7 @@ function AddCauHoiModal({ visible, onCancel, idKhoCauHoi, onCreated }: Props) {
 
   return (
     <Modal
+      style={{ paddingTop: 40 }}
       title="Tạo câu hỏi"
       visible={visible}
       onCancel={() => onCancel()}

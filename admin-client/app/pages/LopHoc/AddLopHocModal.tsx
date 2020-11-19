@@ -41,6 +41,7 @@ function AddLopHocModal({ visible, onCancel, onCreated }: Props) {
 
   return (
     <Modal
+      style={{ paddingTop: 40 }}
       title="Tạo lớp học"
       visible={visible}
       okText="Tạo lớp học"

@@ -43,6 +43,7 @@ function AddSinhVienModal({ visible, onCancel, onCreated, idLopHoc }: Props) {
 
   return (
     <Modal
+      style={{ paddingTop: 40 }}
       title="Tạo sinh viên"
       visible={visible}
       okText="Tạo sinh viên"

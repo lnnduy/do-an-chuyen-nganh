@@ -64,6 +64,7 @@ function UpdateLopHocModal({ visible, onCancel, onUpdated, lopHoc }: Props) {
 
   return (
     <Modal
+      style={{ paddingTop: 40 }}
       title={`Cập nhật lớp học ${lopHoc.tenLop}`}
       visible={visible}
       okText="Cập nhật"

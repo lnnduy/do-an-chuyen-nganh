@@ -200,6 +200,7 @@ function UpdateCauHoiModal({ visible, onCancel, onUpdated, cauHoi }: Props) {
 
   return (
     <Modal
+      style={{ paddingTop: 40 }}
       title="Cập nhật câu hỏi"
       visible={visible}
       onCancel={() => onCancel()}

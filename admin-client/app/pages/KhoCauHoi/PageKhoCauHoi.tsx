@@ -11,7 +11,7 @@ import {
 } from 'antd';
 import {
   ReloadOutlined,
-  UserAddOutlined,
+  PlusOutlined,
   ArrowLeftOutlined,
 } from '@ant-design/icons';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -154,7 +154,7 @@ function PageKhoCauHoi({ match }: Props) {
               </Tooltip>
               <Button
                 type="primary"
-                icon={<UserAddOutlined />}
+                icon={<PlusOutlined />}
                 size="large"
                 onClick={() => setShowAddKhoCauHoi(true)}
               >

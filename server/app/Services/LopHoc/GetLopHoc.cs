@@ -9,7 +9,7 @@ namespace Server.Service
   {
     public async Task<Response<LopHoc>> GetLopHoc(long id)
     {
-      var lopHoc = await _lopHocRepo.FindLopHocById(id);
+      var lopHoc = await _lopHocRepo.GetLopHocById(id);
       return new Response<LopHoc>
       {
         StatusCode = 200,

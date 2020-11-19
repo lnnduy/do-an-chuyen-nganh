@@ -9,7 +9,7 @@ namespace Server.Service
   {
     public async Task<Response<LopHoc>> CapNhatLopHoc(long id, TaoLopHocRequest request)
     {
-      var existsLopHoc = await _lopHocRepo.FindLopHocById(id);
+      var existsLopHoc = await _lopHocRepo.GetLopHocById(id);
 
       if (existsLopHoc == null)
         return new Response<LopHoc>

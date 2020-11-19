@@ -42,6 +42,7 @@ function AddKhoCauHoiModal({ visible, onCancel, onCreated, idHocPhan }: Props) {
 
   return (
     <Modal
+      style={{ paddingTop: 40 }}
       title="Tạo kho câu hỏi"
       visible={visible}
       okText="Tạo kho câu hỏi"

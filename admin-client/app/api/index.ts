@@ -6,6 +6,7 @@ import sinhVien from './sinhVien';
 import khoCauHoi from './khoCauHoi';
 import cauHoi from './cauHoi';
 import deThi from './deThi';
+import caThi from './caThi';
 
 const api = {
   auth,
@@ -16,6 +17,7 @@ const api = {
   khoCauHoi,
   cauHoi,
   deThi,
+  caThi,
 };
 
 export default api;

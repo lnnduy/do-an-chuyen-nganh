@@ -60,7 +60,13 @@ function Actions({ hocPhan, onUpdated, onDeleted }: Props) {
           />
         </Tooltip>
         <Tooltip title="Quản lý ca thi">
-          <Button type="text" icon={<ScheduleOutlined />} />
+          <Button
+            type="text"
+            icon={<ScheduleOutlined />}
+            onClick={() =>
+              history.push(`${ROUTES.HOC_PHAN}/${hocPhan.id}/ca-thi`)
+            }
+          />
         </Tooltip>
         <Tooltip title="Cập nhật học phần">
           <Button

@@ -9,7 +9,7 @@ namespace Server.Service
   {
     public async Task<Response<SinhVien>> ThemSinhVienVaoLop(long idLopHoc, TaoSinhVienRequest request)
     {
-      var lopHoc = await _lopHocRepo.FindLopHocById(idLopHoc);
+      var lopHoc = await _lopHocRepo.GetLopHocById(idLopHoc);
 
       if (lopHoc == null) return new Response<SinhVien>
       {

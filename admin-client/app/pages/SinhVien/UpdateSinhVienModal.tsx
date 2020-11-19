@@ -25,7 +25,6 @@ function UpdateSinhVienModal({
   onCancel,
   onUpdated,
   sinhVien,
-  idLopHoc,
 }: Props) {
   const formRef = useRef<any>();
   const [failed, setFailed] = useState(false);
@@ -107,6 +106,7 @@ function UpdateSinhVienModal({
 
   return (
     <Modal
+      style={{ paddingTop: 40 }}
       title={`Cập nhật sinh viên ${sinhVien.hoTen}`}
       visible={visible}
       okText="Cập nhật"

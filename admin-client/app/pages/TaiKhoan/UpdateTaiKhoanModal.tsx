@@ -90,6 +90,7 @@ function UpdateTaiKhoanModal({
 
   return (
     <Modal
+      style={{ paddingTop: 40 }}
       title={`Cập nhật tài khoản ${taiKhoan.username}`}
       visible={visible}
       okText="Cập nhật"

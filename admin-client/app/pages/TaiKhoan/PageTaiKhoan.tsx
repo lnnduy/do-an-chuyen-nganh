@@ -11,7 +11,7 @@ import {
   Tooltip,
   notification,
 } from 'antd';
-import { UserAddOutlined, ReloadOutlined } from '@ant-design/icons';
+import { PlusOutlined, ReloadOutlined } from '@ant-design/icons';
 import columns from './columns';
 import AddTaiKhoanModal from './AddTaiKhoanModal';
 import handleErrors from '../../shared/handleErrors';
@@ -106,7 +106,7 @@ export default function PageTaiKhoan() {
               </Tooltip>
               <Button
                 type="primary"
-                icon={<UserAddOutlined />}
+                icon={<PlusOutlined />}
                 size="large"
                 onClick={() => setShowAddTaiKhoan(true)}
               >

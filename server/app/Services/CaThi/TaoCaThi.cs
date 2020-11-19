@@ -8,12 +8,12 @@ namespace Server.Service
 {
   public partial class CaThiService
   {
-    public async Task<Response<CaThi>> TaoCaThi(long idHocPhan, TaoCaThiRequest request)
+    public async Task<Response<CaThiResponse>> TaoCaThi(long idHocPhan, TaoCaThiRequest request)
     {
       var hocPhan = await _hocPhanRepo.GetHocPhanById(idHocPhan);
 
       if (hocPhan == null)
-        return new Response<CaThi>
+        return new Response<CaThiResponse>
         {
           StatusCode = 400,
           Success = false,
@@ -33,12 +33,19 @@ namespace Server.Service
       };
 
       var newCaThi = await _caThiRepo.CreateCaThi(caThi);
+      var lopHoc = await _lopHocRepo.GetLopHocById(newCaThi.IdLopHoc);
+      var deThi = await _deThiRepo.GetDeThiById(newCaThi.IdDeThi);
+      var dsIdCauHoi = _deThiRepo.GetDsIdCauHoi(deThi.Id);
+      var dsCauHoi = await _cauHoiRepo.GetMultipleCauHoiById(dsIdCauHoi);
+      var deThiResponse = new DeThiResponse(deThi, dsCauHoi);
+      var giamThi = await _taiKhoanRepo.GetTaiKhoanById(newCaThi.IdGiamThi);
+      var caThiResponse = new CaThiResponse(newCaThi, lopHoc, deThiResponse, giamThi);
 
-      return new Response<CaThi>
+      return new Response<CaThiResponse>
       {
         StatusCode = 201,
         Success = true,
-        Data = newCaThi
+        Data = caThiResponse
       };
     }
   }

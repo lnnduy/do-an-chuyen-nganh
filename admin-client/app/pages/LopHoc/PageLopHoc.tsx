@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ReloadOutlined, UserAddOutlined } from '@ant-design/icons';
+import { ReloadOutlined, PlusOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import api from '../../api';
 import handleErrors from '../../shared/handleErrors';
@@ -101,7 +101,7 @@ function PageLopHoc() {
               </Tooltip>
               <Button
                 type="primary"
-                icon={<UserAddOutlined />}
+                icon={<PlusOutlined />}
                 size="large"
                 onClick={() => setShowAddLopHoc(true)}
               >

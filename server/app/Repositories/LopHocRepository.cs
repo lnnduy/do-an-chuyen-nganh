@@ -26,7 +26,7 @@ namespace Server.Repository
       await _context.SaveChangesAsync();
       return lopHoc;
     }
-    public async Task<LopHoc> FindLopHocById(long id)
+    public async Task<LopHoc> GetLopHocById(long id)
     {
       return await _context.LopHocContext.FindAsync(id);
     }

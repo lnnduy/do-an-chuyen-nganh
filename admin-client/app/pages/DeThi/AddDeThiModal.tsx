@@ -182,6 +182,7 @@ function AddDeThiModal({ visible, onCancel, onCreated, idHocPhan }: Props) {
 
   return (
     <Modal
+      style={{ paddingTop: 40 }}
       title="Tạo đề thi"
       visible={visible}
       okText="Tạo đề thi"

@@ -11,6 +11,7 @@ type Props = {
 function XemChiTietModal({ visible, deThi, onClose }: Props) {
   return (
     <Modal
+      style={{ paddingTop: 40 }}
       footer={null}
       maskClosable={false}
       width={1600}
