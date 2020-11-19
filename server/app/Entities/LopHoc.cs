@@ -12,5 +12,6 @@ namespace Server.Entity
     public string TenLop { get; set; }
 
     public virtual List<SinhVien> DsSinhVien { get; set; }
+    public virtual List<CaThi> DsCaThi { get; set; }
   }
 }

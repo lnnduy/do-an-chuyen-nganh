@@ -16,6 +16,7 @@ namespace Server.Entity
     public DbSet<DapAn> DapAnContext { get; set; }
     public DbSet<DeThi> DeThiContext { get; set; }
     public DbSet<ChiTietDeThi> ChiTietDeThiContext { get; set; }
+    public DbSet<CaThi> CaThiContext { get; set; }
 
     public ServerContext() : base()
     { }
@@ -77,6 +78,34 @@ namespace Server.Entity
         .WithMany(ch => ch.DsDeThi)
         .HasForeignKey(ctdt => ctdt.IdCauHoi)
         .HasConstraintName("FK_CauHoi_ChiTietDeThi")
+        .OnDelete(DeleteBehavior.NoAction);
+
+      builder.Entity<CaThi>()
+        .HasOne(ct => ct.HocPhan)
+        .WithMany(hp => hp.DsCaThi)
+        .HasForeignKey(ct => ct.IdHocPhan)
+        .HasConstraintName("FK_HocPhan_CaThi")
+        .OnDelete(DeleteBehavior.NoAction);
+
+      builder.Entity<CaThi>()
+        .HasOne(ct => ct.LopHoc)
+        .WithMany(lh => lh.DsCaThi)
+        .HasForeignKey(ct => ct.IdLopHoc)
+        .HasConstraintName("FK_LopHoc_CaThi")
+        .OnDelete(DeleteBehavior.NoAction);
+
+      builder.Entity<CaThi>()
+        .HasOne(ct => ct.GiamThi)
+        .WithMany(gt => gt.DsCaThi)
+        .HasForeignKey(ct => ct.IdGiamThi)
+        .HasConstraintName("FK_GiamThi_CaThi")
+        .OnDelete(DeleteBehavior.NoAction);
+
+      builder.Entity<CaThi>()
+        .HasOne(ct => ct.DeThi)
+        .WithMany(dt => dt.DsCaThi)
+        .HasForeignKey(ct => ct.IdDeThi)
+        .HasConstraintName("FK_DeThi_CaThi")
         .OnDelete(DeleteBehavior.NoAction);
     }
   }

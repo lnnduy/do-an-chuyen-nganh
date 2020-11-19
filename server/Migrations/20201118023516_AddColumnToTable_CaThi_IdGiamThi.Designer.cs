@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Entity;
 
 namespace server.Migrations
 {
     [DbContext(typeof(ServerContext))]
-    partial class ServerContextModelSnapshot : ModelSnapshot
+    [Migration("20201118023516_AddColumnToTable_CaThi_IdGiamThi")]
+    partial class AddColumnToTable_CaThi_IdGiamThi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,9 +26,6 @@ namespace server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("IdDeThi")
-                        .HasColumnType("bigint");
 
                     b.Property<long>("IdGiamThi")
                         .HasColumnType("bigint");
@@ -46,12 +45,7 @@ namespace server.Migrations
                     b.Property<long>("ThoiGianThi")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("TrangThai")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("IdDeThi");
 
                     b.HasIndex("IdGiamThi");
 
@@ -275,13 +269,6 @@ namespace server.Migrations
 
             modelBuilder.Entity("Server.Entity.CaThi", b =>
                 {
-                    b.HasOne("Server.Entity.DeThi", "DeThi")
-                        .WithMany("DsCaThi")
-                        .HasForeignKey("IdDeThi")
-                        .HasConstraintName("FK_DeThi_CaThi")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("Server.Entity.TaiKhoan", "GiamThi")
                         .WithMany("DsCaThi")
                         .HasForeignKey("IdGiamThi")

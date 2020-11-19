@@ -13,5 +13,6 @@ namespace Server.Entity
 
     public virtual List<KhoCauHoi> DsKhoCauHoi { get; set; }
     public virtual List<DeThi> DsDeThi { get; set; }
+    public virtual List<CaThi> DsCaThi { get; set; }
   }
 }

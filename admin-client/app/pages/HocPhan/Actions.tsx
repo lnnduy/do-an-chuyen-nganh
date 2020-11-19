@@ -6,6 +6,7 @@ import {
   EditOutlined,
   FileUnknownOutlined,
   FileTextOutlined,
+  ScheduleOutlined,
 } from '@ant-design/icons';
 import UpdateHocPhanModal from './UpdateHocPhanModal';
 import handleErrors from '../../shared/handleErrors';
@@ -40,6 +41,15 @@ function Actions({ hocPhan, onUpdated, onDeleted }: Props) {
   return (
     <>
       <Space>
+        <Tooltip title="Quản lý kho câu hỏi">
+          <Button
+            type="text"
+            icon={<FileUnknownOutlined />}
+            onClick={() =>
+              history.push(`${ROUTES.HOC_PHAN}/${hocPhan.id}/kho-cau-hoi`)
+            }
+          />
+        </Tooltip>
         <Tooltip title="Quản lý đề thi">
           <Button
             type="text"
@@ -49,14 +59,8 @@ function Actions({ hocPhan, onUpdated, onDeleted }: Props) {
             }
           />
         </Tooltip>
-        <Tooltip title="Quản lý kho câu hỏi">
-          <Button
-            type="text"
-            icon={<FileUnknownOutlined />}
-            onClick={() =>
-              history.push(`${ROUTES.HOC_PHAN}/${hocPhan.id}/kho-cau-hoi`)
-            }
-          />
+        <Tooltip title="Quản lý ca thi">
+          <Button type="text" icon={<ScheduleOutlined />} />
         </Tooltip>
         <Tooltip title="Cập nhật học phần">
           <Button

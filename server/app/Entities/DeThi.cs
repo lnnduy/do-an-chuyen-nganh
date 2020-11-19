@@ -17,5 +17,6 @@ namespace Server.Entity
 
     public virtual HocPhan HocPhan { get; set; }
     public virtual List<ChiTietDeThi> DsCauHoi { get; set; }
+    public virtual List<CaThi> DsCaThi { get; set; }
   }
 }

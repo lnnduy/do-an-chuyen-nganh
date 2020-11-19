@@ -48,6 +48,7 @@ namespace Server
       services.AddScoped<IKhoCauHoiService, KhoCauHoiService>();
       services.AddScoped<ICauHoiService, CauHoiService>();
       services.AddScoped<IDeThiService, DeThiService>();
+      services.AddScoped<ICaThiService, CaThiService>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
