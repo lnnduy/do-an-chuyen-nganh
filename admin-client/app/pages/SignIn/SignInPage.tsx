@@ -11,10 +11,11 @@ import {
 } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import actions from '../store/actions';
-import fallImage from '../constants/fall-image';
-import api from '../api';
+import actions from '../../store/actions';
+import fallImage from '../../constants/fall-image';
+import api from '../../api';
 import { useHistory } from 'react-router-dom';
+import ROUTES from '../../constants/routes';
 
 function SignInPage() {
   const dispatch = useDispatch();
@@ -127,6 +128,13 @@ function SignInPage() {
               </Button>
             </Form.Item>
           </Form>
+          <Button
+            block
+            size="large"
+            onClick={() => history.push(ROUTES.THI_SINH_DANG_NHAP)}
+          >
+            Dành cho thí sinh
+          </Button>
         </Card>
       </Col>
     </Row>

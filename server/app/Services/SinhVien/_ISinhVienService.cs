@@ -9,6 +9,7 @@ namespace Server.Service
   public interface ISinhVienService
   {
     Response<List<SinhVien>> GetDanhSachLop(long idLopHoc);
+    Response<SinhVien> GetSinhVienByMssv(string mssv);
     Task<Response<SinhVien>> ThemSinhVienVaoLop(long idLopHoc, TaoSinhVienRequest request);
     Task<Response<SinhVien>> CapNhatSinhVien(long idSinhVien, TaoSinhVienRequest request);
     Task<Response> XoaSinhVien(long idSinhVien);

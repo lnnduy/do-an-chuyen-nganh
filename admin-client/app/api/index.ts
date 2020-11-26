@@ -7,6 +7,8 @@ import khoCauHoi from './khoCauHoi';
 import cauHoi from './cauHoi';
 import deThi from './deThi';
 import caThi from './caThi';
+import publicCaThi from './publicCaThi';
+import ketQua from './ketQua';
 
 const api = {
   auth,
@@ -18,6 +20,8 @@ const api = {
   cauHoi,
   deThi,
   caThi,
+  publicCaThi,
+  ketQua,
 };
 
 export default api;

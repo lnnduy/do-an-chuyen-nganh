@@ -18,6 +18,31 @@ namespace server.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Server.Entity.BaiLam", b =>
+                {
+                    b.Property<long>("IdCaThi")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IdSinhVien")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IdCauHoi")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IdDapAn")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("IdCaThi", "IdSinhVien", "IdCauHoi", "IdDapAn");
+
+                    b.HasIndex("IdCauHoi");
+
+                    b.HasIndex("IdDapAn");
+
+                    b.HasIndex("IdSinhVien");
+
+                    b.ToTable("BaiLam");
+                });
+
             modelBuilder.Entity("Server.Entity.CaThi", b =>
                 {
                     b.Property<long>("Id")
@@ -36,6 +61,9 @@ namespace server.Migrations
 
                     b.Property<long>("IdLopHoc")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("MaBaoVe")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TenCaThi")
                         .HasColumnType("nvarchar(max)");
@@ -273,6 +301,61 @@ namespace server.Migrations
                     b.ToTable("TaiKhoan");
                 });
 
+            modelBuilder.Entity("Server.Entity.ThiSinh", b =>
+                {
+                    b.Property<long>("IdSinhVien")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IdCaThi")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("DiaChiIp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SoLanDangNhap")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TenMay")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdSinhVien", "IdCaThi");
+
+                    b.HasIndex("IdCaThi");
+
+                    b.ToTable("ThiSinh");
+                });
+
+            modelBuilder.Entity("Server.Entity.BaiLam", b =>
+                {
+                    b.HasOne("Server.Entity.CaThi", "CaThi")
+                        .WithMany("DsBaiLam")
+                        .HasForeignKey("IdCaThi")
+                        .HasConstraintName("FK_CaThi_BaiLam")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Server.Entity.CauHoi", "CauHoi")
+                        .WithMany("DsBaiLam")
+                        .HasForeignKey("IdCauHoi")
+                        .HasConstraintName("FK_CauHoi_BaiLam")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Server.Entity.DapAn", "DapAn")
+                        .WithMany("DsBaiLam")
+                        .HasForeignKey("IdDapAn")
+                        .HasConstraintName("FK_DapAn_BaiLam")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Server.Entity.SinhVien", "SinhVien")
+                        .WithMany("DsBaiLam")
+                        .HasForeignKey("IdSinhVien")
+                        .HasConstraintName("FK_SinhVien_BaiLam")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Server.Entity.CaThi", b =>
                 {
                     b.HasOne("Server.Entity.DeThi", "DeThi")
@@ -368,6 +451,23 @@ namespace server.Migrations
                         .HasForeignKey("IdLopHoc")
                         .HasConstraintName("FK_LopHoc_SinhVien")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Server.Entity.ThiSinh", b =>
+                {
+                    b.HasOne("Server.Entity.CaThi", "CaThi")
+                        .WithMany("DsThiSinh")
+                        .HasForeignKey("IdCaThi")
+                        .HasConstraintName("FK_CaThi_ThiSinh")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Server.Entity.SinhVien", "SinhVien")
+                        .WithMany("DsCaThi")
+                        .HasForeignKey("IdSinhVien")
+                        .HasConstraintName("FK_SinhVien_ThiSinh")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

@@ -17,6 +17,19 @@ async function getDanhSachLop(idLopHoc: number): Promise<any> {
   }
 }
 
+async function getSinhVienByMssv(mssv: any): Promise<any> {
+  let res = null;
+  try {
+    const { data } = await apiSinhVien.get(`${mssv}`);
+    res = data;
+    return data;
+  } catch (error) {
+    handleErrors(error);
+    console.log(error);
+    return res;
+  }
+}
+
 async function themSinhVienVaoLop(
   idLopHoc: number,
   sinhVien: any
@@ -65,6 +78,7 @@ async function xoaSinhVien(id: number): Promise<any> {
 
 export default {
   getDanhSachLop,
+  getSinhVienByMssv,
   themSinhVienVaoLop,
   capNhatSinhVien,
   xoaSinhVien,

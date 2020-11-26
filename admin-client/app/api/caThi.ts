@@ -17,10 +17,75 @@ async function getDsCaThi(idHocPhan: number): Promise<any> {
   }
 }
 
+async function getDsCaThiDaNhan(): Promise<any> {
+  let res = null;
+  try {
+    const { data } = await apiCaThi.get('da-nhan');
+    res = data;
+    return data;
+  } catch (error) {
+    handleErrors(error);
+    console.log(error);
+    return res;
+  }
+}
+
 async function getCaThi(id: number): Promise<any> {
   let res = null;
   try {
     const { data } = await apiCaThi.get(`${id}`);
+    res = data;
+    return data;
+  } catch (error) {
+    handleErrors(error);
+    console.log(error);
+    return res;
+  }
+}
+
+async function getMaBaoVeCaThi(id: number): Promise<any> {
+  let res = null;
+  try {
+    const { data } = await apiCaThi.get(`${id}/ma-bao-ve`);
+    res = data;
+    return data;
+  } catch (error) {
+    handleErrors(error);
+    console.log(error);
+    return res;
+  }
+}
+
+async function batDauCaThi(id: number, ticks: number): Promise<any> {
+  let res = null;
+  try {
+    const { data } = await apiCaThi.get(`${id}/bat-dau-ca-thi/${ticks}`);
+    res = data;
+    return data;
+  } catch (error) {
+    handleErrors(error);
+    console.log(error);
+    return res;
+  }
+}
+
+async function ketThucCaThi(id: number): Promise<any> {
+  let res = null;
+  try {
+    const { data } = await apiCaThi.get(`${id}/ket-thuc-ca-thi`);
+    res = data;
+    return data;
+  } catch (error) {
+    handleErrors(error);
+    console.log(error);
+    return res;
+  }
+}
+
+async function getDsThiSinhDaThamGia(id: number): Promise<any> {
+  let res = null;
+  try {
+    const { data } = await apiCaThi.get(`${id}/thi-sinh-da-tham-gia`);
     res = data;
     return data;
   } catch (error) {
@@ -78,7 +143,12 @@ async function xoaCaThi(id: number): Promise<any> {
 
 export default {
   getDsCaThi,
+  getDsCaThiDaNhan,
+  getMaBaoVeCaThi,
   getCaThi,
+  batDauCaThi,
+  ketThucCaThi,
+  getDsThiSinhDaThamGia,
   themCaThiVaoHocPhan,
   capNhatCaThi,
   xoaCaThi,

@@ -10,11 +10,11 @@ namespace Server.Controller
   [Authorize]
   [ApiController]
   [Route("api/lop-hoc/{idLopHoc}/sinh-vien")]
-  public partial class SinhVienController : ControllerBase
+  public class LopHocSinhVienController : ControllerBase
   {
     private readonly ISinhVienService _sinhVienService;
 
-    public SinhVienController(ISinhVienService sinhVienService)
+    public LopHocSinhVienController(ISinhVienService sinhVienService)
     {
       _sinhVienService = sinhVienService;
     }
@@ -50,6 +50,22 @@ namespace Server.Controller
   [Route("api/sinh-vien")]
   public partial class SinhVienController : ControllerBase
   {
+    private readonly ISinhVienService _sinhVienService;
+
+    public SinhVienController(ISinhVienService sinhVienService)
+    {
+      _sinhVienService = sinhVienService;
+    }
+
+    [AllowAnonymous]
+    [HttpGet("{mssv}")]
+    public IActionResult CapNhatSinhVien(string mssv)
+    {
+      var serviceResult = _sinhVienService.GetSinhVienByMssv(mssv);
+
+      return Ok(serviceResult);
+    }
+
     [HttpPut("{id}")]
     public async Task<IActionResult> CapNhatSinhVien(long id, TaoSinhVienRequest request)
     {

@@ -10,6 +10,7 @@ namespace Server.Model.Response
     public long ThoiGianBatDau { get; set; }
     public long ThoiGianThi { get; set; }
     public string TrangThai { get; set; }
+    public string MaBaoVe { get; set; }
     public LopHoc LopHoc { get; set; }
     public DeThiResponse DeThi { get; set; }
     public ThongTinTaiKhoan GiamThi { get; set; }
@@ -22,6 +23,7 @@ namespace Server.Model.Response
       ThoiGianBatDau = caThi.ThoiGianBatDau;
       ThoiGianThi = caThi.ThoiGianThi;
       TrangThai = caThi.TrangThai;
+      MaBaoVe = caThi.MaBaoVe;
 
       LopHoc = lopHoc;
       DeThi = deThi;

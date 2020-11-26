@@ -15,6 +15,13 @@ namespace Server.Repository
       return dsDapAn;
     }
 
+    public async Task<DapAn> GetDapAnById(long id)
+    {
+      var dapAn = await _context.DapAnContext.FindAsync(id);
+
+      return dapAn;
+    }
+
     public async Task<List<DapAn>> FindMultipleDapAnById(List<long> dsId)
     {
       var dsDapAn = new List<DapAn>();

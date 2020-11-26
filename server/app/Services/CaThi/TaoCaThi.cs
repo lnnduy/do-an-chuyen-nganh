@@ -41,6 +41,22 @@ namespace Server.Service
       var giamThi = await _taiKhoanRepo.GetTaiKhoanById(newCaThi.IdGiamThi);
       var caThiResponse = new CaThiResponse(newCaThi, lopHoc, deThiResponse, giamThi);
 
+      var dsSinhVien = _sinhVienRepo.GetAllInLopHoc(lopHoc.Id);
+
+      foreach (var sinhVien in dsSinhVien)
+      {
+        var thiSinh = new ThiSinh
+        {
+          IdCaThi = newCaThi.Id,
+          IdSinhVien = sinhVien.Id,
+          SoLanDangNhap = 0,
+          TenMay = null,
+          DiaChiIp = null
+        };
+
+        await _thiSinhRepo.CreateThiSinh(thiSinh);
+      }
+
       return new Response<CaThiResponse>
       {
         StatusCode = 201,

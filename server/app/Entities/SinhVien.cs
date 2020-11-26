@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Server.Entity
@@ -12,8 +13,11 @@ namespace Server.Entity
     public string SoDienThoai { get; set; }
     public string Email { get; set; }
     public string DiaChi { get; set; }
+
     public long IdLopHoc { get; set; }
 
     public virtual LopHoc LopHoc { get; set; }
+    public virtual List<ThiSinh> DsCaThi { get; set; }
+    public virtual List<BaiLam> DsBaiLam { get; set; }
   }
 }

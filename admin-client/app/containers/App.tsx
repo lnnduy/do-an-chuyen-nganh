@@ -6,6 +6,7 @@ import {
   TeamOutlined,
   ContainerOutlined,
   ReadOutlined,
+  CarryOutOutlined,
 } from '@ant-design/icons';
 import Title from '../components/Title';
 import { Link } from 'react-router-dom';
@@ -40,6 +41,9 @@ export default function App(props: Props) {
           </Menu.Item>
           <Menu.Item key="3" icon={<ReadOutlined />}>
             <Link to="/hoc-phan">Học phần</Link>
+          </Menu.Item>
+          <Menu.Item key="4" icon={<CarryOutOutlined />}>
+            <Link to="/thi">Thi</Link>
           </Menu.Item>
         </Menu>
       </Sider>

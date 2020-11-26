@@ -4,6 +4,7 @@ import {
   DeleteOutlined,
   QuestionCircleOutlined,
   EditOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
 import UpdateCaThiModal from './UpdateCaThiModal';
 import handleErrors from '../../shared/handleErrors';

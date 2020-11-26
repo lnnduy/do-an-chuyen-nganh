@@ -20,6 +20,11 @@ namespace Server.Repository
       return await _context.SinhVienContext.FindAsync(id);
     }
 
+    public SinhVien GetSinhVienByMssv(string mssv)
+    {
+      return _context.SinhVienContext.Where(sv => sv.MSSV == mssv).FirstOrDefault();
+    }
+
     public async Task<SinhVien> CreateSinhVien(SinhVien sinhVien)
     {
       await _context.SinhVienContext.AddAsync(sinhVien);
