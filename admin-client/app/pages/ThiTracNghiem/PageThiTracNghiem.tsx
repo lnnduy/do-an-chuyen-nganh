@@ -233,6 +233,7 @@ function PageThiTracNghiem() {
                     >
                       {ketQua?.dsKetQuaCauHoi?.map((kqch: any, i: number) => (
                         <Card
+                          key={i}
                           style={
                             kqch.traLoiDung
                               ? { borderColor: 'green' }
@@ -243,9 +244,9 @@ function PageThiTracNghiem() {
                             kqch.nhieuDapAn ? ' (nhiều đáp án)' : ''
                           }: ${kqch.noiDung}`}</Typography.Title>
                           <Space direction="vertical" style={{ width: '100%' }}>
-                            {kqch?.dsKetQuaDapAn?.map((da: any) => (
+                            {kqch?.dsKetQuaDapAn?.map((da: any, j: number) => (
                               <Card
-                                key={da.id}
+                                key={`${i}-${j}`}
                                 style={
                                   da.dapAnDung
                                     ? { borderColor: 'green' }

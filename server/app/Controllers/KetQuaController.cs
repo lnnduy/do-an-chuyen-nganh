@@ -26,4 +26,30 @@ namespace Server.Controller
       return Ok(serviceResult);
     }
   }
+
+  [Authorize]
+  [ApiController]
+  [Route("api/ket-qua/ca-thi/{idCaThi}")]
+  public class KetQuaCaThiController : ControllerBase
+  {
+    private readonly IKetQuaService _ketQuaService;
+
+    public KetQuaCaThiController(IKetQuaService ketQuaService)
+    {
+      _ketQuaService = ketQuaService;
+    }
+
+    [HttpGet("")]
+    public async Task<IActionResult> CaThi(long idCaThi)
+    {
+      var claim = User.Claims.FirstOrDefault(c => c.Type == "id");
+
+      if (!User.Identity.IsAuthenticated || claim == null)
+        return Unauthorized();
+
+      var serviceResult = await _ketQuaService.CaThi(idCaThi);
+
+      return Ok(serviceResult);
+    }
+  }
 }

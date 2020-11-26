@@ -4,11 +4,12 @@ import {
   DeleteOutlined,
   QuestionCircleOutlined,
   EditOutlined,
-  UserOutlined,
+  FundOutlined,
 } from '@ant-design/icons';
 import UpdateCaThiModal from './UpdateCaThiModal';
 import handleErrors from '../../shared/handleErrors';
 import api from '../../api';
+import XemKetQuaModal from './XemKetQuaModal';
 
 type Props = {
   idHocPhan: number;
@@ -19,6 +20,7 @@ type Props = {
 
 function Actions({ idHocPhan, onUpdated, onDeleted, caThi }: Props) {
   const [updateCaThi, setUpdateCaThi] = useState(false);
+  const [showXemKetQua, setShowXemKetQua] = useState(false);
 
   const deleteCaThi = async () => {
     try {
@@ -39,6 +41,13 @@ function Actions({ idHocPhan, onUpdated, onDeleted, caThi }: Props) {
   return (
     <>
       <Space>
+        <Tooltip title="Xem kết quả">
+          <Button
+            type="text"
+            icon={<FundOutlined />}
+            onClick={() => setShowXemKetQua(true)}
+          />
+        </Tooltip>
         <Tooltip title="Cập nhật ca thi">
           <Button
             type="text"
@@ -64,6 +73,13 @@ function Actions({ idHocPhan, onUpdated, onDeleted, caThi }: Props) {
           caThi={caThi}
           idHocPhan={idHocPhan}
           onUpdated={onUpdated}
+        />
+      )}
+      {showXemKetQua && (
+        <XemKetQuaModal
+          idCaThi={caThi.id}
+          visible={showXemKetQua}
+          onCancel={setShowXemKetQua}
         />
       )}
     </>

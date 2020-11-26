@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Server.Entity;
 using Server.Enum;
 using Server.Model.Response;
 
@@ -50,27 +49,13 @@ namespace Server.Service
 
       var deThi = await _deThiRepo.GetDeThiById(caThi.IdDeThi);
 
-      if (thiSinh == null)
+      if (deThi == null)
         return new Response<KetQuaResponse>
         {
           StatusCode = 400,
           Success = false,
           Errors = new[] { "Không tìm thấy đề thi" }
         };
-
-      // var dsBaiLam = _baiLamRepo.GetAll(idCaThi, idSinhVien);
-      // var hashBaiLam = new Dictionary<long, List<BaiLam>>();
-
-      // foreach (var baiLam in dsBaiLam)
-      // {
-      //   if (hashBaiLam.ContainsKey(baiLam.IdCauHoi))
-      //     hashBaiLam[baiLam.IdCauHoi].Add(baiLam);
-      //   else {
-      //     var listBaiLam = new List<BaiLam>();
-      //     listBaiLam.Add(baiLam);
-      //     hashBaiLam.Add(baiLam.IdCauHoi, listBaiLam);
-      //   }
-      // }
 
       var dsIdCauHoi = _deThiRepo.GetDsIdCauHoi(deThi.Id);
       var dsCauHoi = await _cauHoiRepo.GetMultipleCauHoiById(dsIdCauHoi);

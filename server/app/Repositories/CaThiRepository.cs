@@ -36,7 +36,6 @@ namespace Server.Repository
     public List<CaThi> GetAllCaThiDaNhan(long idTaiKhoan)
     {
       var dsCaThi = _context.CaThiContext.Where(ct => ct.IdGiamThi == idTaiKhoan)
-                                          .Where(ct => ct.TrangThai != TrangThaiCaThi.DaKetThuc)
                                           .ToList();
 
       return dsCaThi;
