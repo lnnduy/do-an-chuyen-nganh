@@ -64,10 +64,14 @@ const createWindow = async () => {
         ? {
             nodeIntegration: true,
             devTools: true,
+            webSecurity: false,
+            allowRunningInsecureContent: true,
           }
         : {
             preload: path.join(__dirname, 'dist/renderer.prod.js'),
             devTools: true,
+            webSecurity: false,
+            allowRunningInsecureContent: true,
           },
     darkTheme: true,
     titleBarStyle: 'hidden',
@@ -95,6 +99,8 @@ const createWindow = async () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  app.commandLine.appendSwitch('ignore-certification-errors');
 
   new AppUpdater();
 };
