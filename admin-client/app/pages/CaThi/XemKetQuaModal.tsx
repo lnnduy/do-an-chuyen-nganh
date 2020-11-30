@@ -40,38 +40,42 @@ function XemKetQuaModal({ visible, idCaThi, onCancel }: Props) {
       width={1000}
       style={{ paddingTop: 45 }}
     >
-      <Row>
-        <Col span={24}>
-          <Typography.Title level={3}>
-            Tên đề thi: {ketQua.tenDeThi}
-          </Typography.Title>
-        </Col>
-        <Col span={24}>
-          <Typography.Title level={3}>
-            Số câu hỏi: {ketQua.soCauHoi}
-          </Typography.Title>
-        </Col>
-      </Row>
-      <Row
-        gutter={[10, 10]}
-        style={{
-          width: '100%',
-          minHeight: 600,
-          maxHeight: 600,
-          overflow: 'auto',
-          padding: '10px 0',
-        }}
-      >
-        {ketQua.dsKetQuaCaNhan.map((kqcn: any, i: number) => (
-          <Col key={i} span={8}>
-            <Card>
-              <Typography>Mã sinh viên: {kqcn.mssv}</Typography>
-              <Typography>Họ tên: {kqcn.hoTen}</Typography>
-              <Typography>Số câu đúng: {kqcn.soCauTraLoiDung}</Typography>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+      {ketQua !== null && (
+        <>
+          <Row>
+            <Col span={24}>
+              <Typography.Title level={3}>
+                Tên đề thi: {ketQua.tenDeThi}
+              </Typography.Title>
+            </Col>
+            <Col span={24}>
+              <Typography.Title level={3}>
+                Số câu hỏi: {ketQua.soCauHoi}
+              </Typography.Title>
+            </Col>
+          </Row>
+          <Row
+            gutter={[10, 10]}
+            style={{
+              width: '100%',
+              minHeight: 600,
+              maxHeight: 600,
+              overflow: 'auto',
+              padding: '10px 0',
+            }}
+          >
+            {ketQua.dsKetQuaCaNhan.map((kqcn: any, i: number) => (
+              <Col key={i} span={8}>
+                <Card>
+                  <Typography>Mã sinh viên: {kqcn.mssv}</Typography>
+                  <Typography>Họ tên: {kqcn.hoTen}</Typography>
+                  <Typography>Số câu đúng: {kqcn.soCauTraLoiDung}</Typography>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </>
+      )}
     </Modal>
   );
 }
