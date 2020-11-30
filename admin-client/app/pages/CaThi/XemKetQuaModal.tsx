@@ -70,6 +70,12 @@ function XemKetQuaModal({ visible, idCaThi, onCancel }: Props) {
                   <Typography>Mã sinh viên: {kqcn.mssv}</Typography>
                   <Typography>Họ tên: {kqcn.hoTen}</Typography>
                   <Typography>Số câu đúng: {kqcn.soCauTraLoiDung}</Typography>
+                  <Typography>
+                    Điểm:{' '}
+                    {Math.floor(
+                      (kqcn.soCauTraLoiDung / 10) * kqcn.soCauTraLoiDung * 100
+                    ) / 100}
+                  </Typography>
                 </Card>
               </Col>
             ))}

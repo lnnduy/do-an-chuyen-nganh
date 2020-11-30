@@ -216,6 +216,13 @@ function PageThiTracNghiem() {
                           )?.length
                         }
                       </Descriptions.Item>
+                      <Descriptions.Item label="Số câu trả lời sai">
+                        {Math.floor(
+                          ketQua?.dsKetQuaCauHoi?.filter(
+                            (kqch: any) => kqch.traLoiDung === true
+                          )?.length * 100 || 0
+                        ) / 100}
+                      </Descriptions.Item>
                     </Descriptions>
                   </Card>
                 </Col>

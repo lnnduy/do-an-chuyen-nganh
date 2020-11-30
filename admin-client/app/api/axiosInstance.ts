@@ -1,12 +1,21 @@
 import axios from 'axios';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const getToken = (): string | null => {
   return localStorage.getItem('token');
 };
 
 function axiosInstance(path: string, authRequired: boolean = true) {
+  console.log(
+    process.env.REACT_SERVER_IP + ':' + process.env.REACT_SERVER_PORT
+  );
   const axiosInstace = axios.create({
-    baseURL: `https://localhost:5001/api/${path}`,
+    baseURL: `https://${
+      process.env.REACT_SERVER_IP + ':' + process.env.REACT_SERVER_PORT ||
+      'localhost:5001'
+    }/api/${path}`,
   });
 
   const httpGet = (path: string = '') =>
