@@ -73,7 +73,7 @@ function XemKetQuaModal({ visible, idCaThi, onCancel }: Props) {
                   <Typography>
                     Điểm:{' '}
                     {Math.floor(
-                      (kqcn.soCauTraLoiDung / 10) * kqcn.soCauTraLoiDung * 100
+                      (10 / ketQua.soCauHoi) * kqcn.soCauTraLoiDung * 100
                     ) / 100}
                   </Typography>
                 </Card>

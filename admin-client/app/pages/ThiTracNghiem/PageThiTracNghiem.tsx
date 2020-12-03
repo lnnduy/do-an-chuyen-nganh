@@ -218,9 +218,11 @@ function PageThiTracNghiem() {
                       </Descriptions.Item>
                       <Descriptions.Item label="Số câu trả lời sai">
                         {Math.floor(
-                          ketQua?.dsKetQuaCauHoi?.filter(
-                            (kqch: any) => kqch.traLoiDung === true
-                          )?.length * 100 || 0
+                          (10 / ketQua?.dsKetQuaCauHoi?.length) *
+                            ketQua?.dsKetQuaCauHoi?.filter(
+                              (kqch: any) => kqch.traLoiDung === true
+                            )?.length *
+                            100 || 0
                         ) / 100}
                       </Descriptions.Item>
                     </Descriptions>
