@@ -8,6 +8,7 @@ import {
 import UpdateCauHoiModal from '../pages/CauHoi/UpdateCauHoiModal';
 import handleErrors from '../shared/handleErrors';
 import api from '../api';
+import DoKhoCauHoi from './DoKhoCauHoi';
 
 type Props = {
   cauHoi: any;
@@ -64,6 +65,7 @@ function CardCauHoi({
         []
       }
     >
+      <DoKhoCauHoi doKho={cauHoi.doKho} />
       <Typography.Title level={4}>
         <pre>{cauHoi.noiDung}</pre>
       </Typography.Title>
@@ -85,7 +87,6 @@ function CardCauHoi({
           </Card>
         ))}
       </Space>
-
       {showUpdateCauHoi && (
         <UpdateCauHoiModal
           cauHoi={cauHoi}

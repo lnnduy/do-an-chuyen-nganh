@@ -12,5 +12,7 @@ namespace Server.Service
     Task<Response<CauHoi>> ThemCauHoiVaoKhoCauHoi(long idKhoCauHoi, TaoCauHoiRequest request);
     Task<Response<CauHoi>> CapNhatCauHoi(long id, CapNhatCauHoiRequest request);
     Task<Response> XoaCauHoi(long id);
+
+    Response<DsIdCauHoiClassifiedResponse> GetDsIdCauHoiByDsIdKhoCauHoi(List<long> dsIdKhoCauHoi);
   }
 }

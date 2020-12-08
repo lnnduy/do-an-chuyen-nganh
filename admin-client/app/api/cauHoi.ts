@@ -17,6 +17,19 @@ async function getDsCauHoi(idKhoCauHoi: number): Promise<any> {
   }
 }
 
+async function getDsIdCauHoiByDsIdKhoCauHoi(
+  dsIdKhoCauHoi: number[]
+): Promise<any> {
+  try {
+    const { data } = await apiCauHoi.post('/ids', { dsIdKhoCauHoi });
+    return data;
+  } catch (error) {
+    handleErrors(error);
+    console.log(error);
+    return null;
+  }
+}
+
 async function themCauHoiVaoKhoCauHoi(
   idKhoCauHoi: number,
   cauHoi: any
@@ -68,4 +81,5 @@ export default {
   themCauHoiVaoKhoCauHoi,
   capNhatCauHoi,
   xoaCauHoi,
+  getDsIdCauHoiByDsIdKhoCauHoi,
 };

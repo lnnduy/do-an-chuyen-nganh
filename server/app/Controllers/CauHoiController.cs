@@ -46,10 +46,23 @@ namespace Server.Controller
     }
   }
 
-  [Route("api/cau-hoi/{id}")]
+  [Route("api/cau-hoi")]
   public partial class CauHoiController : ControllerBase
   {
-    [HttpPut("")]
+    [HttpPost("ids")]
+    public IActionResult GetDsIdCauHoiByDsIdKhoCauHoi(GetDsIdCauHoiByDsIdKhoCauHoiRequest request)
+    {
+      var claim = User.Claims.FirstOrDefault(c => c.Type == "id");
+
+      if (!User.Identity.IsAuthenticated || claim == null)
+        return Unauthorized();
+
+      var serviceResult = _cauHoiService.GetDsIdCauHoiByDsIdKhoCauHoi(request.DsIdKhoCauHoi);
+
+      return Ok(serviceResult);
+    }
+
+    [HttpPut("/{id}")]
     public async Task<IActionResult> GetDsCauHoi(long id, CapNhatCauHoiRequest request)
     {
       var claim = User.Claims.FirstOrDefault(c => c.Type == "id");
@@ -62,7 +75,7 @@ namespace Server.Controller
       return Ok(serviceResult);
     }
 
-    [HttpDelete("")]
+    [HttpDelete("/{id}")]
     public async Task<IActionResult> XoaCauHoi(long id)
     {
       var claim = User.Claims.FirstOrDefault(c => c.Type == "id");

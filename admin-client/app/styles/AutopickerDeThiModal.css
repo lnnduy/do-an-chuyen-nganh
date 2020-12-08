@@ -1,0 +1,14 @@
+.custom-slider .ant-slider {
+  position: relative;
+  top: -24px;
+}
+
+.custom-slider .ant-slider-rail,
+.custom-slider .ant-slider-track.ant-slider-track-1 {
+  background-color: transparent;
+}
+
+.custom-slider .ant-slider:hover .ant-slider-rail,
+.custom-slider .ant-slider:hover .ant-slider-track.ant-slider-track-1:hover {
+  background-color: transparent;
+}

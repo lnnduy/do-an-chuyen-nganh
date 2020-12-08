@@ -8,11 +8,8 @@ const getToken = (): string | null => {
 };
 
 function axiosInstance(path: string, authRequired: boolean = true) {
-  console.log(
-    process.env.REACT_SERVER_IP + ':' + process.env.REACT_SERVER_PORT
-  );
   const axiosInstace = axios.create({
-    baseURL: `https://${
+    baseURL: `${process.env.REACT_PROTOCOL}://${
       process.env.REACT_SERVER_IP + ':' + process.env.REACT_SERVER_PORT ||
       'localhost:5001'
     }/api/${path}`,

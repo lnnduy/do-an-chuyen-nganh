@@ -162,9 +162,11 @@ function PageThiTracNghiem() {
               style={{ padding: '0 12px', marginBottom: 50 }}
             >
               <Card>
-                <Typography.Title level={4}>{`Câu ${i + 1}${
-                  ch.nhieuDapAn ? ' (nhiều đáp án)' : ''
-                }: ${ch.noiDung}`}</Typography.Title>
+                <Typography.Title level={4}>
+                  <pre>{`Câu ${i + 1}${
+                    ch.nhieuDapAn ? ' (nhiều đáp án)' : ''
+                  }: ${ch.noiDung}`}</pre>
+                </Typography.Title>
                 <Space direction="vertical" style={{ width: '100%' }}>
                   {ch.dsDapAn.map((da: any) => (
                     <Card
@@ -173,7 +175,9 @@ function PageThiTracNghiem() {
                       onClick={() => chonDapAn(ch.id, da.id)}
                       style={da.selected ? { borderColor: 'green' } : {}}
                     >
-                      <Typography>{da.noiDung}</Typography>
+                      <Typography>
+                        <pre>{da.noiDung}</pre>
+                      </Typography>
                     </Card>
                   ))}
                 </Space>

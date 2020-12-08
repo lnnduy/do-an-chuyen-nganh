@@ -7,12 +7,12 @@ namespace Server.Service
 {
   public partial class KhoCauHoiService
   {
-    public async Task<Response<List<KhoCauHoi>>> GetDsKhoCauHoi(long idHocPhan)
+    public async Task<Response<List<KhoCauHoiResponse>>> GetDsKhoCauHoi(long idHocPhan)
     {
       var hocPhan = await _hocPhanRepo.GetHocPhanById(idHocPhan);
 
       if (hocPhan == null)
-        return new Response<List<KhoCauHoi>>
+        return new Response<List<KhoCauHoiResponse>>
         {
           StatusCode = 400,
           Success = false,
@@ -20,12 +20,20 @@ namespace Server.Service
         };
 
       var dsKhoCauHoi = _khoCauHoiRepo.GetAll(idHocPhan);
+      var dsKhoCauHoiResponse = new List<KhoCauHoiResponse>();
 
-      return new Response<List<KhoCauHoi>>
+      foreach (var khoCauHoi in dsKhoCauHoi)
+      {
+        khoCauHoi.DsCauHoi = _cauHoiRepo.GetAll(khoCauHoi.Id);
+        var khoCauHoiResponse = new KhoCauHoiResponse(khoCauHoi);
+        dsKhoCauHoiResponse.Add(khoCauHoiResponse);
+      }
+
+      return new Response<List<KhoCauHoiResponse>>
       {
         StatusCode = 200,
         Success = true,
-        Data = dsKhoCauHoi
+        Data = dsKhoCauHoiResponse
       };
     }
   }

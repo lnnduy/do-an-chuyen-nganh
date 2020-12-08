@@ -23,6 +23,7 @@ import actions from '../../store/actions';
 import AddDeThiModal from './AddDeThiModal';
 import ROUTES from '../../constants/routes';
 import { useHistory } from 'react-router';
+import AutopickerDeThiModal from './AutopickerDeThiModal';
 
 type Props = {
   match: any;
@@ -32,6 +33,7 @@ function PageDeThi({ match }: Props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const [showAddDeThi, setShowAddDeThi] = useState(false);
+  const [showAutopickerDeThi, setShowAutopickerDeThi] = useState(false);
   const [loading, setLoading] = useState(false);
   const [dsDeThi, setDsDeThi] = useState(new Array<any>());
   const [hocPhan, setHocPhan] = useState<any>(null);
@@ -156,6 +158,14 @@ function PageDeThi({ match }: Props) {
               >
                 Thêm đề thi
               </Button>
+              <Button
+                type="primary"
+                icon={<PlusOutlined />}
+                size="large"
+                onClick={() => setShowAutopickerDeThi(true)}
+              >
+                Thêm đề thi (tự động)
+              </Button>
             </Space>
           </Row>
         </Col>
@@ -171,6 +181,14 @@ function PageDeThi({ match }: Props) {
           idHocPhan={match.params.idHocPhan}
           visible={showAddDeThi}
           onCancel={setShowAddDeThi}
+          onCreated={onCreated}
+        />
+      )}
+      {showAutopickerDeThi && (
+        <AutopickerDeThiModal
+          idHocPhan={match.params.idHocPhan}
+          visible={showAutopickerDeThi}
+          onCancel={setShowAutopickerDeThi}
           onCreated={onCreated}
         />
       )}

@@ -6,5 +6,6 @@ namespace Server.Service
   {
     private readonly KhoCauHoiRepository _khoCauHoiRepo = new KhoCauHoiRepository();
     private readonly HocPhanRepository _hocPhanRepo = new HocPhanRepository();
+    private readonly CauHoiRepository _cauHoiRepo = new CauHoiRepository();
   }
 }

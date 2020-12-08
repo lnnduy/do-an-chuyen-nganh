@@ -15,6 +15,7 @@ import api from '../../api';
 import handleErrors from '../../shared/handleErrors';
 import { ArrowRightOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import DO_KHO_CAU_HOI from '../../constants/do-kho-cau-hoi';
+import DoKhoCauHoi from '../../components/DoKhoCauHoi';
 
 type Props = {
   idHocPhan: number;
@@ -406,6 +407,7 @@ function UpdateDeThiModal({
               span={24}
               style={{
                 height: '100%',
+                overflow: 'auto',
                 flex: 'auto',
                 border: '1px solid #303030',
                 padding: 8,
@@ -426,6 +428,7 @@ function UpdateDeThiModal({
                             </Tooltip>,
                           ]}
                         >
+                          <DoKhoCauHoi doKho={ch.doKho} />
                           <Typography>{ch.noiDung}</Typography>
                         </Card>
                       </Col>
@@ -455,6 +458,7 @@ function UpdateDeThiModal({
               span={24}
               style={{
                 height: '100%',
+                overflow: 'auto',
                 flex: 'auto',
                 border: '1px solid #303030',
                 padding: 8,
@@ -473,6 +477,7 @@ function UpdateDeThiModal({
                         </Tooltip>,
                       ]}
                     >
+                      <DoKhoCauHoi doKho={ch.doKho} />
                       <Typography>{ch.noiDung}</Typography>
                     </Card>
                   </Col>

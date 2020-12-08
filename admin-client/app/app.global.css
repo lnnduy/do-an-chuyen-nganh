@@ -6,6 +6,7 @@
 @import './styles/LayoutMain.css';
 @import './styles/CardCauHoi.css';
 @import './styles/AddCauHoiModal.css';
+@import './styles/AutopickerDeThiModal.css';
 
 * {
   user-select: none;

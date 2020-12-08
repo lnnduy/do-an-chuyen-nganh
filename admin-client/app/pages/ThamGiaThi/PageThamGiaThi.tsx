@@ -71,7 +71,7 @@ function PageThamGiaThi() {
       <Row gutter={[10, 10]}>
         {dsCaThi.map((ct) => (
           <Col span={6}>
-            <Card hoverable onClick={() => setSelectedCaThi(ct)}>
+            <Card key={ct.id} hoverable onClick={() => setSelectedCaThi(ct)}>
               <Typography.Title level={5}>{ct.tenCaThi}</Typography.Title>
               <Typography.Text>{ct.trangThai}</Typography.Text>
             </Card>

@@ -8,7 +8,7 @@ namespace Server.Service
 {
   public interface IKhoCauHoiService
   {
-    Task<Response<List<KhoCauHoi>>> GetDsKhoCauHoi(long idHocHocPhan);
+    Task<Response<List<KhoCauHoiResponse>>> GetDsKhoCauHoi(long idHocHocPhan);
     Task<Response<KhoCauHoi>> GetKhoCauHoi(long id);
     Task<Response<KhoCauHoi>> ThemKhoCauHoiVaoHocPhan(long idHocPhan, TaoKhoCauHoiRequest request);
     Task<Response<KhoCauHoi>> CapNhatKhoCauHoi(long id, TaoKhoCauHoiRequest request);
