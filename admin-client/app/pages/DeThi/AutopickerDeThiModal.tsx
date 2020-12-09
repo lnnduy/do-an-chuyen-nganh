@@ -42,6 +42,7 @@ function AutopickerDeThiModal({
     soLuongCauHoiTrungBinh: 0,
     soLuongCauHoiKho: 0,
   });
+  const [loading, setLoading] = useState<boolean>(false);
 
   const loadKhoCauHoi = async () => {
     try {
@@ -86,6 +87,7 @@ function AutopickerDeThiModal({
   };
 
   const taoDeThi = async (form?: any) => {
+    setLoading(true);
     try {
       if (form === undefined) {
         formRef.current?.submit();
@@ -140,8 +142,10 @@ function AutopickerDeThiModal({
 
       onCreated(res.data);
       onCancel(false);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
   const getValueFieldSoLuongCauHoi = () => {
@@ -336,6 +340,7 @@ function AutopickerDeThiModal({
       centered
       style={{ paddingTop: 40 }}
       onOk={() => taoDeThi()}
+      confirmLoading={loading}
     >
       <Row gutter={[20, 0]}>
         <Col span={10}>
