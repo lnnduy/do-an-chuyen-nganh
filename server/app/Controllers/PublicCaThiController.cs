@@ -57,5 +57,13 @@ namespace Server.Controller
 
       return Ok(serviceResult);
     }
+
+    [HttpGet("{idCaThi}/nopBai")]
+    public async Task<IActionResult> NopBai(long idSinhVien, long idCaThi)
+    {
+      var serviceResult = await _caThiService.NopBai(idSinhVien, idCaThi);
+
+      return Ok(serviceResult);
+    }
   }
 }

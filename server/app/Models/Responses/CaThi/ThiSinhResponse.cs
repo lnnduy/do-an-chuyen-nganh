@@ -10,6 +10,7 @@ namespace Server.Model.Response
     public string TenMay { get; set; }
     public int SoLanDangNhap { get; set; }
     public string DiaChiIp { get; set; }
+    public string TrangThaiThi { get; set; }
 
     public ThiSinhResponse(SinhVien sinhVien, ThiSinh thiSinh)
     {
@@ -19,6 +20,7 @@ namespace Server.Model.Response
       TenMay = thiSinh.TenMay;
       SoLanDangNhap = thiSinh.SoLanDangNhap;
       DiaChiIp = thiSinh.DiaChiIp;
+      TrangThaiThi = thiSinh.TrangThaiThi;
     }
   }
 }

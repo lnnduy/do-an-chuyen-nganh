@@ -15,6 +15,7 @@ function PageThiTracNghiem() {
   const [loadedDeThi, setLoadedDeThi] = useState<boolean>(false);
   const [dsCauHoi, setDsCauHoi] = useState<any[]>([]);
   const [ketQua, setKetQua] = useState<any>(null);
+  const [daNopBai, setDaNopBai] = useState<boolean>(false);
 
   const loadDeThi = async () => {
     try {
@@ -102,8 +103,26 @@ function PageThiTracNghiem() {
     }
   };
 
+  const nopBai = async () => {
+    try {
+      const res = await api.publicCaThi.nopBai(caThi.id);
+
+      if (!res.success) {
+        console.log(res.errors);
+        handleErrors(res);
+        return;
+      }
+
+      setDaNopBai(true);
+      setDsCauHoi([]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     dispatch(actions.app.updateTitle(`${caThi.tenCaThi}`));
+    setDaNopBai(caThi.trangThaiThi === 'Đã nộp bài');
   }, []);
 
   return (
@@ -125,21 +144,23 @@ function PageThiTracNghiem() {
       >
         {caThi.tenCaThi}
       </Typography.Title>
-      {!loadedDeThi && caThi.trangThai === TRANG_THAI_CA_THI.DA_BAT_DAU && (
-        <Row justify="center">
-          <Col span={6}>
-            <Button
-              block
-              type="primary"
-              size="large"
-              onClick={() => loadDeThi()}
-            >
-              Lấy đề thi
-            </Button>
-          </Col>
-        </Row>
-      )}
-      {caThi.trangThai === TRANG_THAI_CA_THI.DA_KET_THUC && (
+      {!daNopBai &&
+        !loadedDeThi &&
+        caThi.trangThai === TRANG_THAI_CA_THI.DA_BAT_DAU && (
+          <Row justify="center">
+            <Col span={6}>
+              <Button
+                block
+                type="primary"
+                size="large"
+                onClick={() => loadDeThi()}
+              >
+                Lấy đề thi
+              </Button>
+            </Col>
+          </Row>
+        )}
+      {(daNopBai || caThi.trangThai === TRANG_THAI_CA_THI.DA_KET_THUC) && (
         <Row justify="center">
           <Col span={6}>
             <Button
@@ -153,7 +174,7 @@ function PageThiTracNghiem() {
           </Col>
         </Row>
       )}
-      {caThi.trangThai === TRANG_THAI_CA_THI.DA_BAT_DAU && (
+      {ketQua === null && caThi.trangThai === TRANG_THAI_CA_THI.DA_BAT_DAU && (
         <Row style={{ marginTop: 50 }} justify="center">
           {dsCauHoi.map((ch, i) => (
             <Col
@@ -186,14 +207,15 @@ function PageThiTracNghiem() {
           ))}
         </Row>
       )}
-      {caThi.trangThai === TRANG_THAI_CA_THI.DA_KET_THUC && (
+      {(ketQua !== null ||
+        caThi.trangThai === TRANG_THAI_CA_THI.DA_KET_THUC) && (
         <Row style={{ marginTop: 50 }} justify="center">
           <Col span={18} style={{ padding: '0 12px', marginBottom: 50 }}>
             <Space direction="vertical" style={{ width: '100%' }} size="large">
               <Row>
                 <Col span={24}>
                   <Card>
-                    <Descriptions title="Thông tin sinh viên và ca thi">
+                    <Descriptions title="Thông tin sinh viên và kết quả thi">
                       <Descriptions.Item label="Mã số sinh viên">
                         {ketQua?.sinhVien?.mssv}
                       </Descriptions.Item>
@@ -220,7 +242,7 @@ function PageThiTracNghiem() {
                           )?.length
                         }
                       </Descriptions.Item>
-                      <Descriptions.Item label="Số câu trả lời sai">
+                      <Descriptions.Item label="Điểm">
                         {Math.floor(
                           (10 / ketQua?.dsKetQuaCauHoi?.length) *
                             ketQua?.dsKetQuaCauHoi?.filter(
@@ -282,15 +304,17 @@ function PageThiTracNghiem() {
           </Col>
         </Row>
       )}
-      {loadedDeThi && caThi.trangThai === TRANG_THAI_CA_THI.DA_BAT_DAU && (
-        <Row justify="center">
-          <Col span={6}>
-            <Button block type="primary" size="large">
-              Nộp bài
-            </Button>
-          </Col>
-        </Row>
-      )}
+      {!daNopBai &&
+        loadedDeThi &&
+        caThi.trangThai === TRANG_THAI_CA_THI.DA_BAT_DAU && (
+          <Row justify="center">
+            <Col span={6}>
+              <Button block type="primary" size="large" onClick={nopBai}>
+                Nộp bài
+              </Button>
+            </Col>
+          </Row>
+        )}
     </Space>
   );
 }

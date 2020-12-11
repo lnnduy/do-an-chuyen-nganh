@@ -187,6 +187,7 @@ function PageDieuKhienCaThi({ match }: Props) {
             { title: 'Số lần đăng nhập', dataIndex: 'soLanDangNhap' },
             { title: 'Tên máy hiện tại', dataIndex: 'tenMay' },
             { title: 'Địa chỉ ip', dataIndex: 'diaChiIp' },
+            { title: 'Trạng thái', dataIndex: 'trangThaiThi' },
           ]}
           dataSource={dsThiSinh}
           style={{ width: '100%' }}

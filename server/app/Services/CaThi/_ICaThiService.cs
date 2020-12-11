@@ -22,6 +22,7 @@ namespace Server.Service
 
     Task<Response<List<CaThi>>> GetDsCaThiSanSang(long idSinhVien);
     Task<Response<List<CauHoiResponse>>> GetDeThi(long idSinhVien, long idCaThi);
-    Task<Response<CaThi>> ThamGiaCaThi(long idSinhVien, long idCaThi, ThamGiaCaThiRequest request);
+    Task<Response> NopBai(long idSinhVien, long idCaThi);
+    Task<Response<ThamGiaCaThiResponse>> ThamGiaCaThi(long idSinhVien, long idCaThi, ThamGiaCaThiRequest request);
   }
 }

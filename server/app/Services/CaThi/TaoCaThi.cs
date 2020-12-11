@@ -51,7 +51,8 @@ namespace Server.Service
           IdSinhVien = sinhVien.Id,
           SoLanDangNhap = 0,
           TenMay = null,
-          DiaChiIp = null
+          DiaChiIp = null,
+          TrangThaiThi = TrangThaiThi.ChuaThi
         };
 
         await _thiSinhRepo.CreateThiSinh(thiSinh);

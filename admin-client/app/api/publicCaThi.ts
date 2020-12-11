@@ -28,6 +28,19 @@ const thamGiaCaThi = async (idCaThi: number, request: any) => {
   }
 };
 
+const nopBai = async (idCaThi: number) => {
+  try {
+    const idSinhVien = localStorage.getItem('idSinhVien');
+    const { data } = await apiPublicCaThi.get(
+      `${idSinhVien}/${idCaThi}/nopBai`
+    );
+    return data;
+  } catch (error) {
+    handleErrors(error);
+    console.log(error);
+  }
+};
+
 const getDeThi = async (idCaThi: number) => {
   try {
     const idSinhVien = localStorage.getItem('idSinhVien');
@@ -81,4 +94,5 @@ export default {
   getDeThi,
   boChonDapAn,
   chonDapAn,
+  nopBai,
 };
