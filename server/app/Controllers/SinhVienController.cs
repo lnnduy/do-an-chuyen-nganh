@@ -47,6 +47,7 @@ namespace Server.Controller
   }
 
   [Authorize]
+  [ApiController]
   [Route("api/sinh-vien")]
   public partial class SinhVienController : ControllerBase
   {
